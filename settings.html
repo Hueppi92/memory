@@ -10,6 +10,7 @@
         <h1>Settings</h1>
     </div>
     <div id="settingsContainer">
+        <div id="gameSettings">
         <div id="themeSettings">
             <p><img src="./assets/palette.svg" alt="Palette icon" /> Game themes</p>
             <ul>
@@ -34,7 +35,22 @@
                 <li><label><input type="radio" name="boardSize" value="36" /> 36 Cards <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
             </ul>
         </div>
+        </div>
+        <div id="preview_gameBar">
+        <div id="themePreview">
+            <img src="./assets/theme_preview/gameing.svg" alt="Theme preview" />
+        </div>
+        <div id="gameBar">
+                <p id="game_theme">Game Theme</p>
+                <hr id="gameBar_line" />
+                <p id="player">Player</p>
+                <hr id="gameBar_line" />
+                <p id="board_size">Board Size</p>
+                <button id="playButton" aria-label="Start Game"><a href="game.html">Start Game</a></button>
+        </div>
+        </div>
     </div>
+
 
     <script type="module" src="/src/settings.ts"></script>
 </body>

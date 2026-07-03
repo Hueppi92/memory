@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory - Settings</title>
-  <script type="module" crossorigin src="./assets/main-Dzw7rsAF.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-EK5WJq2J.css">
-  <link rel="stylesheet" crossorigin href="./assets/settings-CFsFTkju.css">
+  <script type="module" crossorigin src="./assets/main-DJQ-_5Ph.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BvxE8wy3.css">
+  <link rel="stylesheet" crossorigin href="./assets/settings-azc2zfrf.css">
 </head>
 <body>
     <div class="settingsHeading">
         <h1>Settings</h1>
     </div>
     <div id="settingsContainer">
+        <div id="gameSettings">
         <div id="themeSettings">
             <p><img src="./assets/palette.svg" alt="Palette icon" /> Game themes</p>
             <ul>
@@ -37,7 +38,22 @@
                 <li><label><input type="radio" name="boardSize" value="36" /> 36 Cards <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
             </ul>
         </div>
+        </div>
+        <div id="preview_gameBar">
+        <div id="themePreview">
+            <img src="./assets/theme_preview/gameing.svg" alt="Theme preview" />
+        </div>
+        <div id="gameBar">
+                <p id="game_theme">Game Theme</p>
+                <hr id="gameBar_line" />
+                <p id="player">Player</p>
+                <hr id="gameBar_line" />
+                <p id="board_size">Board Size</p>
+                <button id="playButton" aria-label="Start Game"><a href="game.html">Start Game</a></button>
+        </div>
+        </div>
     </div>
+
 
 </body>
 </html>

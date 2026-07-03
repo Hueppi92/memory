@@ -1,20 +1,23 @@
 @use "../base/fonts" as *;
+@use "../abstract/mixin" as mixin;
+@use "../components/buttons" as buttons;
 
 body {
   background-color: white;
-  margin: 0 auto;
-  padding: 0;
+  
   font-family: $font-family-almarai;
   height: 100vh;
 }
 
 #settingsContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: start;
+  gap: 361px;
   margin-left: 50px;
   height: 500px;
   padding-left: 178px;
+
 
   & p {
     font-family: $font-family-almarai;
@@ -24,11 +27,12 @@ body {
     margin: 0;
     padding-bottom: 17px;
   }
-  & img {
+  & ul img {
     width: 32px;
     height: 32px;
     margin-right: 10px;
   }
+
 }
 
 .settingsHeading {
@@ -59,18 +63,60 @@ body {
   }
 }
 
+#gameSettings {
+   & p img {
+    padding-right:8px;
+  }
+}
+
 ul {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   margin: 0;
-  padding-bottom: 55px;
+  padding-bottom: 55px; 
+  @include mixin.flexColumn(start, 13px);
+  min-width: 200px;
+
 
   & li {
     list-style: none;
     padding-left: 8px;
   }
 }
+#preview_gameBar {
+  @include mixin.flexColumn(flex-end, 13px);
+  
+  & img#themePreview {
+    width: 430px;
+    height: 378px;
+    margin-bottom: 45px;
+  }
+  & #gameBar {
+    background-color: rgba(246, 246, 246, 1);
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+
+    & p {
+      font-family: $font-family-almarai;
+      font-weight: 400;
+      font-size: 20px;
+      margin:0;
+      padding-bottom: 0;
+      
+    }
+    & #gameBar_line {
+      width:56px;
+      height: 0;
+      border: 8px solid rgba(240, 234, 110, 1);
+      rotate: 109deg;
+    }
+    & #playButton {
+      width: 126px;
+      height: 53px;
+  }
+}}
+
 
 label {
   display: inline-flex;
@@ -78,13 +124,14 @@ label {
   gap: 10px;
   cursor: pointer;
   font-family: $font-family-almarai;
+  font-weight: 400;
   position: relative;
   isolation: isolate;
   overflow: visible;
 
   &:hover,
   &:focus-within {
-    font-weight: bold;
+    text-shadow: 0 0 0.01px currentColor;
   }
 
   & img {
