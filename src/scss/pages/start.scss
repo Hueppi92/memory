@@ -1,0 +1,44 @@
+@use '../base/fonts' as *;
+@use '../components/buttons';
+
+body {
+	height: 100vh;
+	background-color: rgba(48, 49, 49, 1);
+	display:flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#hero-section {
+	display:flex;
+	flex-direction:column;
+	align-items: center;
+	gap: 85px;
+}
+
+#controller {
+	position: absolute;
+	bottom: 30px;
+	left:- 80px;
+	width:414px;
+	height: 301px;
+}
+
+#startText {
+	color:white;
+	text-align: start;
+
+	& p {
+		font-family: $font-family-almarai;
+		font-weight: 400;
+		font-size: 48px;
+		margin:0;
+	}
+
+	& h1 {
+		font-family: $font-family-red-rose;
+		font-weight:700;
+		font-size: 140px;
+		margin:0;
+	}
+}

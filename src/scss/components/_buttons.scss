@@ -1,0 +1,60 @@
+@use "../base/fonts" as *;
+
+#playButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  width: 250px;
+  height: 98px;
+  background-color: rgba(240, 234, 110, 1);
+  border: none;
+  margin-top: 0;
+  cursor: pointer;
+  transform-origin: top center;
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+
+  & img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  & img#button-controller {
+    width: 44px;
+    height: 32px;
+    transition: transform 200ms ease-out;
+  }
+
+  & img#button-arrow {
+    width: 33px;
+      }
+
+  & p {
+    margin: 0;
+    font-family: $font-family-red-rose;
+    font-weight: 700;
+    font-size: 40px;
+    color: rgba(48, 49, 49, 1);
+    transition: transform 200ms ease-out;
+  }
+
+  &:hover {
+    transform: scale(1.077, 1.04);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+
+    & img#button-arrow {
+      content: url('/assets/arrow_hover.svg');
+    }
+
+    & p {
+      transform: translateX(8px);
+    }
+
+    & img#button-controller {
+      transform: rotate(-25deg) scale(1.1);
+      
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory - Settings</title>
+</head>
+<body>
+    <div class="settingsHeading">
+        <h1>Settings</h1>
+    </div>
+    <div id="settingsContainer">
+        <div id="themeSettings">
+            <p><img src="./assets/palette.svg" alt="Palette icon" /> Game themes</p>
+            <ul>
+                <li><label><input type="radio" name="theme" value="codeVibes" /> Code vibes theme <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+                <li><label><input type="radio" name="theme" value="gaming" /> Gaming theme <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+                <li><label><input type="radio" name="theme" value="daProjects" /> DA projects theme <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+                <li><label><input type="radio" name="theme" value="foods" /> Foods theme <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+            </ul>
+        </div>
+        <div id="playerSettings">
+            <p><img src="./assets/chess_pawn.svg" alt="Chess pawn icon" /> Choose Player</p>
+            <ul>
+                <li><label><input type="radio" name="player" value="blue" /> Blue <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+                <li><label><input type="radio" name="player" value="orange" /> Orange <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+            </ul>
+        </div>
+        <div id="boardSizeSettings">
+            <p><img src="./assets/style.svg" alt="Style icon" /> Board Size</p>
+            <ul>
+                <li><label><input type="radio" name="boardSize" value="16" /> 16 Cards <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+                <li><label><input type="radio" name="boardSize" value="24" /> 24 Cards <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+                <li><label><input type="radio" name="boardSize" value="36" /> 36 Cards <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module" src="/src/settings.ts"></script>
+</body>
+</html>

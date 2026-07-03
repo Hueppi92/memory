@@ -1,0 +1,1 @@
+import"./main-Dzw7rsAF.js";e();function e(){let e=document.getElementById(`field`);e&&e.addEventListener(`click`,e=>{let t=e.target.closest(`.card`);t&&t.classList.toggle(`is-flipped`)})}

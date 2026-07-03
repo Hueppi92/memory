@@ -1,0 +1,123 @@
+@use "../base/fonts" as *;
+
+body {
+  background-color: white;
+  margin: 0 auto;
+  padding: 0;
+  font-family: $font-family-almarai;
+  height: 100vh;
+}
+
+#settingsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-left: 50px;
+  height: 500px;
+  padding-left: 178px;
+
+  & p {
+    font-family: $font-family-almarai;
+    font-weight: 700;
+    font-size: 24px;
+    color: rgba(48, 49, 49, 1);
+    margin: 0;
+    padding-bottom: 17px;
+  }
+  & img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
+}
+
+.settingsHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 50px;
+  margin-left: 56px;
+  padding-left: 178px;
+
+  & h1 {
+    font-size: 54px;
+    font-family: $font-family-red-rose;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 14px;
+  }
+  & h1::after {
+    content: "";
+    position: absolute;
+    left: -16px;
+    bottom: 0;
+    width: 251px;
+    height: 18px;
+    background: url("/assets/settings_underline.svg") left center / 100% 130%
+      no-repeat;
+  }
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding-bottom: 55px;
+
+  & li {
+    list-style: none;
+    padding-left: 8px;
+  }
+}
+
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: $font-family-almarai;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+
+  &:hover,
+  &:focus-within {
+    font-weight: bold;
+  }
+
+  & img {
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease-out;
+  }
+
+  &:hover img,
+  &:focus-within img {
+    opacity: 1;
+  }
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  background: url("/assets/unchecked_radio.svg") center / contain no-repeat;
+  cursor: pointer;
+
+  &:checked {
+    background-image: url("/assets/checked_radio.svg");
+  }
+  &:hover {
+    background-image: url("/assets/checked_radio.svg");
+  }
+}
