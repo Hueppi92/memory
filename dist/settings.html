@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory - Settings</title>
-  <script type="module" crossorigin src="./assets/main-DJQ-_5Ph.js"></script>
+  <script type="module" crossorigin src="./assets/settings-ghvVciBt.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/main-DJQ-_5Ph.js">
   <link rel="stylesheet" crossorigin href="./assets/main-BvxE8wy3.css">
-  <link rel="stylesheet" crossorigin href="./assets/settings-azc2zfrf.css">
+  <link rel="stylesheet" crossorigin href="./assets/settings-pgtlGsM-.css">
 </head>
 <body>
     <div class="settingsHeading">
@@ -41,15 +42,18 @@
         </div>
         <div id="preview_gameBar">
         <div id="themePreview">
-            <img src="./assets/theme_preview/gameing.svg" alt="Theme preview" />
+            <img id="themePreviewImage" src="./assets/theme_preview/gameing.svg" alt="Theme preview" />
         </div>
         <div id="gameBar">
                 <p id="game_theme">Game Theme</p>
-                <hr id="gameBar_line" />
+                <img id="gameBar_line" src="./assets/gamebar_line.svg" alt="Setting line icon" />
                 <p id="player">Player</p>
-                <hr id="gameBar_line" />
+                <img id="gameBar_line" src="./assets/gamebar_line.svg" alt="Setting line icon" />
                 <p id="board_size">Board Size</p>
-                <button id="playButton" aria-label="Start Game"><a href="game.html">Start Game</a></button>
+                <a id="startButton" href="game.html" aria-label="Start Game">
+                    <img src="./assets/play_on_button.svg" alt="" aria-hidden="true" />
+                    <span>Start</span>
+                </a>
         </div>
         </div>
     </div>

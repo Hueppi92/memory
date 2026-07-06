@@ -38,15 +38,18 @@
         </div>
         <div id="preview_gameBar">
         <div id="themePreview">
-            <img src="./assets/theme_preview/gameing.svg" alt="Theme preview" />
+            <img id="themePreviewImage" src="./assets/theme_preview/gameing.svg" alt="Theme preview" />
         </div>
         <div id="gameBar">
                 <p id="game_theme">Game Theme</p>
-                <hr id="gameBar_line" />
+                <img id="gameBar_line" src="./assets/gamebar_line.svg" alt="Setting line icon" />
                 <p id="player">Player</p>
-                <hr id="gameBar_line" />
+                <img id="gameBar_line" src="./assets/gamebar_line.svg" alt="Setting line icon" />
                 <p id="board_size">Board Size</p>
-                <button id="playButton" aria-label="Start Game"><a href="game.html">Start Game</a></button>
+                <a id="startButton" href="game.html" aria-label="Start Game">
+                    <img src="./assets/play_on_button.svg" alt="" aria-hidden="true" />
+                    <span>Start</span>
+                </a>
         </div>
         </div>
     </div>

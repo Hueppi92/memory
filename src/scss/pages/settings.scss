@@ -4,9 +4,7 @@
 
 body {
   background-color: white;
-  
   font-family: $font-family-almarai;
-  height: 100vh;
 }
 
 #settingsContainer {
@@ -17,7 +15,6 @@ body {
   margin-left: 50px;
   height: 500px;
   padding-left: 178px;
-
 
   & p {
     font-family: $font-family-almarai;
@@ -32,7 +29,6 @@ body {
     height: 32px;
     margin-right: 10px;
   }
-
 }
 
 .settingsHeading {
@@ -64,17 +60,16 @@ body {
 }
 
 #gameSettings {
-   & p img {
-    padding-right:8px;
+  & p img {
+    padding-right: 8px;
   }
 }
 
 ul {
   margin: 0;
-  padding-bottom: 55px; 
+  padding-bottom: 55px;
   @include mixin.flexColumn(start, 13px);
   min-width: 200px;
-
 
   & li {
     list-style: none;
@@ -83,40 +78,54 @@ ul {
 }
 #preview_gameBar {
   @include mixin.flexColumn(flex-end, 13px);
-  
+
   & img#themePreview {
     width: 430px;
     height: 378px;
-    margin-bottom: 45px;
+    gap: 45px;
   }
   & #gameBar {
     background-color: rgba(246, 246, 246, 1);
-    padding: 14px 20px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    width: max-content;
+    min-width: 546px;
+    height: 81px;
     gap: 16px;
+    opacity: 1;
+    padding-top: 14px;
+    padding-right: 20px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    align-items: center;
+    box-sizing: border-box;
 
     & p {
       font-family: $font-family-almarai;
       font-weight: 400;
       font-size: 20px;
-      margin:0;
+      margin: 0;
       padding-bottom: 0;
-      
+      flex-shrink: 0;
+      white-space: nowrap;
     }
-    & #gameBar_line {
-      width:56px;
-      height: 0;
-      border: 8px solid rgba(240, 234, 110, 1);
-      rotate: 109deg;
-    }
-    & #playButton {
-      width: 126px;
-      height: 53px;
-  }
-}}
 
+    & #game_theme {
+      min-width: 140px;
+    }
+
+    & #player {
+      min-width: 70px;
+    }
+
+    & #board_size {
+      min-width: 110px;
+    }
+
+    & #startButton {
+      @include buttons.startActionButton;
+    }
+  }
+}
 
 label {
   display: inline-flex;
