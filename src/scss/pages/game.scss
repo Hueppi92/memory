@@ -1,14 +1,20 @@
 @use '../components/card';
 
 body {
+    --field-columns: 4;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+body[data-board-size='24'],
+body[data-board-size='36'] {
+    --field-columns: 6;
+}
+
 #field {
     display: grid;
-    grid-template-columns: repeat(4, minmax(80px, 100px));
+    grid-template-columns: repeat(var(--field-columns), minmax(80px, 100px));
     gap: 12px;
 }

@@ -1,11 +1,21 @@
 import '/src/scss/base/main.scss';
 import '/src/scss/pages/settings.scss';
+import { loadGameSettings, saveGameSettings, type GameSettings } from './game-settings-storage';
 
-const themePreviewSources: Record<string, string> = {
-	codeVibes: '/assets/theme_preview/IT_logos.svg',
-	gaming: '/assets/theme_preview/gameing.svg',
-	daProjects: '/assets/theme_preview/DA_projects.svg',
-	foods: '/assets/theme_preview/foods.svg',
+const THEME_PREVIEW_BASE_PATH = './assets/theme_preview/';
+
+const themePreviewFileNames: Record<string, string> = {
+	codeVibes: 'codeVibes.svg',
+	gaming: 'gaming.svg',
+	daProjects: 'DA_projects.svg',
+	foods: 'foods.svg',
+};
+
+const themeLabels: Record<string, string> = {
+	codeVibes: 'Code vibes',
+	gaming: 'Gaming',
+	daProjects: 'DA projects',
+	foods: 'Foods',
 };
 
 const gameBarPlaceholders = {
@@ -35,8 +45,29 @@ const gameBarLabels = {
 initSettingsPage();
 
 function initSettingsPage() {
+	applySavedSelections();
 	initThemePreview();
 	initGameBarPreview();
+}
+
+function applySavedSelections() {
+	const savedSettings = loadGameSettings();
+
+	setCheckedInput('theme', savedSettings.theme);
+	setCheckedInput('player', savedSettings.player);
+	setCheckedInput('boardSize', savedSettings.boardSize);
+}
+
+function setCheckedInput(name: string, value?: string | number) {
+	if (!value) {
+		return;
+	}
+
+	const input = document.querySelector<HTMLInputElement>(`input[name="${name}"][value="${String(value)}"]`);
+
+	if (input) {
+		input.checked = true;
+	}
 }
 
 function getSelectedValue(name: string) {
@@ -44,23 +75,7 @@ function getSelectedValue(name: string) {
 }
 
 function getThemeLabel(theme: string) {
-	if (theme === 'codeVibes') {
-		return 'Code vibes';
-	}
-
-	if (theme === 'gaming') {
-		return 'Gaming';
-	}
-
-	if (theme === 'daProjects') {
-		return 'DA projects';
-	}
-
-	if (theme === 'foods') {
-		return 'Foods';
-	}
-
-	return theme;
+	return themeLabels[theme] ?? theme;
 }
 
 function getPlayerLabel(player: string) {
@@ -75,20 +90,8 @@ function getPlayerLabel(player: string) {
 	return player;
 }
 
-function getBoardSizeLabel(boardSize: string) {
-	if (boardSize === '16') {
-		return '16 Cards';
-	}
-
-	if (boardSize === '24') {
-		return '24 Cards';
-	}
-
-	if (boardSize === '36') {
-		return '36 Cards';
-	}
-
-	return boardSize;
+function getBoardSizeLabel(boardSize: number) {
+	return `${boardSize} Cards`;
 }
 
 function initThemePreview() {
@@ -108,10 +111,10 @@ function initThemePreview() {
 			return;
 		}
 
-		const nextSource = themePreviewSources[theme];
+		const nextFileName = themePreviewFileNames[theme];
 
-		if (nextSource) {
-			previewImage.src = nextSource;
+		if (nextFileName) {
+			previewImage.src = `${THEME_PREVIEW_BASE_PATH}${nextFileName}`;
 		}
 	};
 
@@ -143,10 +146,10 @@ function initGameBarPreview() {
 	const selectedSettings = () => ({
 		theme: getSelectedValue('theme'),
 		player: getSelectedValue('player'),
-		boardSize: getSelectedValue('boardSize'),
-	});
+		boardSize: getSelectedValue('boardSize') ? Number(getSelectedValue('boardSize')) : undefined,
+	}) as GameSettings;
 
-	const updateGameBar = (settings: { theme?: string; player?: string; boardSize?: string }) => {
+	const updateGameBar = (settings: GameSettings) => {
 		gameTheme.textContent = settings.theme ? getThemeLabel(settings.theme) : gameBarPlaceholders.theme;
 		player.textContent = settings.player ? getPlayerLabel(settings.player) : gameBarPlaceholders.player;
 		boardSize.textContent = settings.boardSize ? getBoardSizeLabel(settings.boardSize) : gameBarPlaceholders.boardSize;
@@ -168,7 +171,7 @@ function initGameBarPreview() {
 
 			const previewSelection = () => {
 				const currentSettings = selectedSettings();
-				const previewSettings = {
+				const previewSettings: GameSettings = {
 					theme: currentSettings.theme,
 					player: currentSettings.player,
 					boardSize: currentSettings.boardSize,
@@ -183,7 +186,7 @@ function initGameBarPreview() {
 				}
 
 				if (key === 'boardSize') {
-					previewSettings.boardSize = input.value;
+					previewSettings.boardSize = Number(input.value);
 				}
 
 				updateGameBar(previewSettings);
@@ -195,7 +198,11 @@ function initGameBarPreview() {
 			label?.addEventListener('focusout', () => updateGameBar(selectedSettings()));
 
 			input.addEventListener('focus', previewSelection);
-			input.addEventListener('change', () => updateGameBar(selectedSettings()));
+			input.addEventListener('change', () => {
+				const currentSelection = selectedSettings();
+				saveGameSettings(currentSelection);
+				updateGameBar(currentSelection);
+			});
 			input.addEventListener('blur', () => updateGameBar(selectedSettings()));
 		});
 	});
