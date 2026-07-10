@@ -1,9 +1,10 @@
+@use '../base/colors' as *;
 @use '../base/fonts' as *;
 @use '../components/buttons';
 
 body {
 	height: 100vh;
-	background-color: rgba(48, 49, 49, 1);
+	background-color: $color-dark;
 	display:flex;
 	justify-content: center;
 	align-items: center;
@@ -25,7 +26,7 @@ body {
 }
 
 #startText {
-	color:white;
+	color: $color-white;
 	text-align: start;
 
 	& p {

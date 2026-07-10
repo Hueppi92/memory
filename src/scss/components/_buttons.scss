@@ -1,3 +1,4 @@
+@use "../base/colors" as *;
 @use "../base/fonts" as *;
 
 @mixin startActionButton {
@@ -8,8 +9,8 @@
   padding: 0 14px;
   width: 126px;
   height: 53px;
-  background-color: rgba(240, 234, 110, 1);
-  color: rgba(48, 49, 49, 1);
+  background-color: $color-accent;
+  color: $color-dark;
   text-decoration: none;
   border: none;
   font-family: $font-family-red-rose;
@@ -26,18 +27,18 @@
   }
 
   &:hover {
-    background-color: rgba(236, 229, 88, 1);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    background-color: $color-accent-hover;
+    box-shadow: 0 6px 14px $color-shadow;
     transform: translateY(-1px);
   }
 
   &:active {
     transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 6px $color-shadow;
   }
 
   &:focus-visible {
-    outline: 2px solid rgba(48, 49, 49, 0.65);
+    outline: 2px solid $color-outline;
     outline-offset: 2px;
   }
 }
@@ -50,7 +51,7 @@
   padding: 24px;
   width: 250px;
   height: 98px;
-  background-color: rgba(240, 234, 110, 1);
+  background-color: $color-accent;
   border: none;
   margin-top: 0;
   cursor: pointer;
@@ -78,13 +79,13 @@
     font-family: $font-family-red-rose;
     font-weight: 700;
     font-size: 40px;
-    color: rgba(48, 49, 49, 1);
+    color: $color-dark;
     transition: transform 200ms ease-out;
   }
 
   &:hover {
     transform: scale(1.077, 1.04);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 10px 24px $color-shadow-strong;
 
     & img#button-arrow {
       content: url('/assets/arrow_hover.svg');

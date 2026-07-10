@@ -1,6 +1,0 @@
-import"./main-DJQ-_5Ph.js";import{t as e}from"./game-settings-storage-mK9ht-h4.js";var t=`theme_files/`,n=`codeVibes`,r={codeVibes:`codeVibes`,gaming:`gaming`,daProjects:`DA_projects`,foods:`food`},i={codeVibes:[`front.svg`],gaming:[`front.svg`],daProjects:[`front.svg`],foods:[`front.svg`]};a();function a(){let t=e(),r=document.getElementById(`field`);r&&(document.body.dataset.theme=t.theme??n,document.body.dataset.player=t.player??``,document.body.dataset.boardSize=String(t.boardSize??``),l(r,t.boardSize??16,t.theme??n),r.addEventListener(`click`,e=>{let t=e.target.closest(`.card`);t&&t.classList.toggle(`is-flipped`)}))}function o(e,i){return`${t}${r[e]??r[n]}/${i}`}function s(e,t){let r=i[e]??i[n],a=t/2,s=[];for(let t=0;t<a;t++){let n=r[t%r.length],i=o(e,n);s.push(i,i)}return c(s)}function c(e){let t=[...e];for(let e=t.length-1;e>0;e--){let n=Math.floor(Math.random()*(e+1)),r=t[e];t[e]=t[n],t[n]=r}return t}function l(e,t,n){e.innerHTML=``;let r=s(n,t);for(let t=0;t<r.length;t++)e.innerHTML+=` <button class="card" id="card_${t+1}" aria-label="Card ${t+1}">
-            <div class="card__inner">
-                <div class="card__face" style="--card-face: url('${r[t]}')"></div>
-                <div class="card__face card__face--back"></div>
-            </div>
-        </button>`}

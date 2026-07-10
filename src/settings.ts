@@ -1,22 +1,7 @@
 import '/src/scss/base/main.scss';
 import '/src/scss/pages/settings.scss';
 import { loadGameSettings, saveGameSettings, type GameSettings } from './game-settings-storage';
-
-const THEME_PREVIEW_BASE_PATH = './assets/theme_preview/';
-
-const themePreviewFileNames: Record<string, string> = {
-	codeVibes: 'codeVibes.svg',
-	gaming: 'gaming.svg',
-	daProjects: 'DA_projects.svg',
-	foods: 'foods.svg',
-};
-
-const themeLabels: Record<string, string> = {
-	codeVibes: 'Code vibes',
-	gaming: 'Gaming',
-	daProjects: 'DA projects',
-	foods: 'Foods',
-};
+import { DEFAULT_THEME_ID, THEME_BY_ID, THEME_CATALOG } from './theme-catalog';
 
 const gameBarPlaceholders = {
 	theme: 'Game Theme',
@@ -45,15 +30,28 @@ const gameBarLabels = {
 initSettingsPage();
 
 function initSettingsPage() {
+	renderThemeOptions();
 	applySavedSelections();
 	initThemePreview();
 	initGameBarPreview();
 }
 
+function renderThemeOptions() {
+	const themeList = document.querySelector<HTMLUListElement>('#themeSettings ul');
+
+	if (!themeList) {
+		return;
+	}
+
+	themeList.innerHTML = THEME_CATALOG.map((theme) => {
+		return `<li><label><input type="radio" name="theme" value="${theme.id}" /> ${theme.label} theme <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>`;
+	}).join('');
+}
+
 function applySavedSelections() {
 	const savedSettings = loadGameSettings();
 
-	setCheckedInput('theme', savedSettings.theme);
+	setCheckedInput('theme', savedSettings.theme ?? DEFAULT_THEME_ID);
 	setCheckedInput('player', savedSettings.player);
 	setCheckedInput('boardSize', savedSettings.boardSize);
 }
@@ -75,7 +73,7 @@ function getSelectedValue(name: string) {
 }
 
 function getThemeLabel(theme: string) {
-	return themeLabels[theme] ?? theme;
+	return THEME_BY_ID[theme]?.label ?? theme;
 }
 
 function getPlayerLabel(player: string) {
@@ -102,7 +100,7 @@ function initThemePreview() {
 		return;
 	}
 
-	const defaultPreviewSource = previewImage.src;
+	const defaultPreviewSource = THEME_BY_ID[DEFAULT_THEME_ID]?.previewUrl ?? previewImage.src;
 	const getSelectedTheme = () => getSelectedValue('theme');
 
 	const updatePreview = (theme?: string) => {
@@ -111,10 +109,10 @@ function initThemePreview() {
 			return;
 		}
 
-		const nextFileName = themePreviewFileNames[theme];
+		const nextPreviewSource = THEME_BY_ID[theme]?.previewUrl;
 
-		if (nextFileName) {
-			previewImage.src = `${THEME_PREVIEW_BASE_PATH}${nextFileName}`;
+		if (nextPreviewSource) {
+			previewImage.src = nextPreviewSource;
 		}
 	};
 

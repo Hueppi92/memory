@@ -1,6 +1,7 @@
-@mixin flexColumn($align: start, $gap: 0) {
+@mixin flexColumn($align: start, $direction: column, $gap: 0, $justify: start) {
    display: flex;
-   flex-direction: column;
+   flex-direction: $direction;
    align-items: $align;
    gap: $gap;
+   justify-content: $justify;
 }

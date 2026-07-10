@@ -1,10 +1,12 @@
+@use "../base/colors" as *;
 @use "../base/fonts" as *;
 @use "../abstract/mixin" as mixin;
 @use "../components/buttons" as buttons;
 
 body {
-  background-color: white;
+  background-color: $color-white;
   font-family: $font-family-almarai;
+  max-width:1440px;
 }
 
 #settingsContainer {
@@ -20,7 +22,7 @@ body {
     font-family: $font-family-almarai;
     font-weight: 700;
     font-size: 24px;
-    color: rgba(48, 49, 49, 1);
+    color: $color-dark;
     margin: 0;
     padding-bottom: 17px;
   }
@@ -68,7 +70,7 @@ body {
 ul {
   margin: 0;
   padding-bottom: 55px;
-  @include mixin.flexColumn(start, 13px);
+  @include mixin.flexColumn(start, column, 13px);
   min-width: 200px;
 
   & li {
@@ -77,7 +79,7 @@ ul {
   }
 }
 #preview_gameBar {
-  @include mixin.flexColumn(flex-end, 13px);
+  @include mixin.flexColumn(flex-end, column, 13px);
 
   & img#themePreview {
     width: 430px;
@@ -85,7 +87,7 @@ ul {
     gap: 45px;
   }
   & #gameBar {
-    background-color: rgba(246, 246, 246, 1);
+    background-color: $color-surface;
     display: flex;
     width: max-content;
     min-width: 546px;

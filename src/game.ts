@@ -1,23 +1,7 @@
 import '/src/scss/base/main.scss';
 import '/src/scss/pages/game.scss';
 import { loadGameSettings } from './game-settings-storage';
-
-const THEME_FILES_BASE_PATH = 'theme_files/';
-const DEFAULT_THEME = 'codeVibes';
-
-const themeAssetFolders: Record<string, string> = {
-    codeVibes: 'codeVibes',
-    gaming: 'gaming',
-    daProjects: 'DA_projects',
-    foods: 'food',
-};
-
-const themeCardImageFileNames: Record<string, string[]> = {
-    codeVibes: ['front.svg'],
-    gaming: ['front.svg'],
-    daProjects: ['front.svg'],
-    foods: ['front.svg'],
-};
+import { DEFAULT_THEME_ID, THEME_BY_ID } from './theme-catalog';
 
 initGamePage();
 
@@ -30,11 +14,11 @@ function initGamePage() {
     }
 
     // Keep selected settings accessible on the game page for styling/logic.
-    document.body.dataset.theme = selectedSettings.theme ?? DEFAULT_THEME;
+    document.body.dataset.theme = selectedSettings.theme ?? DEFAULT_THEME_ID;
     document.body.dataset.player = selectedSettings.player ?? '';
     document.body.dataset.boardSize = String(selectedSettings.boardSize ?? '');
 
-    renderCards(fieldRef, selectedSettings.boardSize ?? 16, selectedSettings.theme ?? DEFAULT_THEME);
+    renderCards(fieldRef, selectedSettings.boardSize ?? 16, selectedSettings.theme ?? DEFAULT_THEME_ID);
 
     fieldRef.addEventListener('click', (e) => {
         const card = (e.target as HTMLElement).closest('.card') as HTMLButtonElement | null;
@@ -44,20 +28,18 @@ function initGamePage() {
     });
 }
 
-function buildCardFaceUrl(theme: string, fileName: string) {
-    const folderName = themeAssetFolders[theme] ?? themeAssetFolders[DEFAULT_THEME];
-    return `${THEME_FILES_BASE_PATH}${folderName}/${fileName}`;
-}
-
 function createDeck(theme: string, fieldSize: number) {
-    const imageFileNames = themeCardImageFileNames[theme] ?? themeCardImageFileNames[DEFAULT_THEME];
+    const imageFileNames = THEME_BY_ID[theme]?.cardFaceUrls ?? THEME_BY_ID[DEFAULT_THEME_ID]?.cardFaceUrls ?? [];
+
+    if (imageFileNames.length === 0) {
+        return [];
+    }
+
     const pairCount = fieldSize / 2;
     const deck: string[] = [];
 
     for (let index = 0; index < pairCount; index++) {
-        const fileName = imageFileNames[index % imageFileNames.length];
-        const cardFaceUrl = buildCardFaceUrl(theme, fileName);
-
+        const cardFaceUrl = imageFileNames[index % imageFileNames.length];
         deck.push(cardFaceUrl, cardFaceUrl);
     }
 
@@ -81,12 +63,16 @@ function shuffle<T>(items: T[]) {
 function renderCards(fieldRef: HTMLElement, fieldSize: number, theme: string) {
     fieldRef.innerHTML = '';
     const deck = createDeck(theme, fieldSize);
+    const cardBackUrl = THEME_BY_ID[theme]?.cardBackUrl ?? THEME_BY_ID[DEFAULT_THEME_ID]?.cardBackUrl;
 
     for (let i = 0; i < deck.length; i++) {
+        const frontStyleAttribute = deck[i] ? ` style="background-image: url('${deck[i]}')"` : '';
+        const backStyleAttribute = cardBackUrl ? ` style="background-image: url('${cardBackUrl}')"` : '';
+
         fieldRef.innerHTML += ` <button class="card" id="card_${i + 1}" aria-label="Card ${i + 1}">
             <div class="card__inner">
-                <div class="card__face" style="--card-face: url('${deck[i]}')"></div>
-                <div class="card__face card__face--back"></div>
+                <div class="card__face"${frontStyleAttribute}></div>
+                <div class="card__face card__face--back"${backStyleAttribute}></div>
             </div>
         </button>`;
     }

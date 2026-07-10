@@ -14,7 +14,9 @@ const legacyThemeNames: Record<string, string> = {
 	'IT_logos.svg': 'codeVibes',
 	gameing: 'gaming',
 	'gameing.svg': 'gaming',
+	DA_projects: 'daProjects',
 	'DA_projects.svg': 'daProjects',
+	food: 'foods',
 	'foods.svg': 'foods',
 };
 

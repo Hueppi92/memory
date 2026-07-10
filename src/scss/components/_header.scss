@@ -1,0 +1,38 @@
+@use "../abstract/mixin" as mixin;
+@use "../base/colors" as *;
+
+#gameHeader {
+  @include mixin.flexColumn(center, row, 12px, space-between);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 1440px;
+  margin: 41px 112px;
+  height: 62px;
+
+  --scoreboard-label-blue: url("/assets/theme_files/codeVibes/label_blue.svg");
+  --scoreboard-label-orange: url("/assets/theme_files/codeVibes/label_orange.svg");
+  & #scoreBoard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 62px;
+  }
+
+  .scoreBoardLabel {
+    width: 24px;
+    height: 20px;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &--blue {
+      background-image: var(--scoreboard-label-blue);
+    }
+
+    &--orange {
+      background-image: var(--scoreboard-label-orange);
+    }
+  }
+}

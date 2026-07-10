@@ -11,6 +11,7 @@
         height: 100%;
         transform-style: preserve-3d;
         transition: all 300ms ease-in-out;
+        transform: rotateY(180deg);
     }
 
     &__face {
@@ -32,7 +33,7 @@
     }
 
     &.is-flipped .card__inner {
-        transform: rotateY(180deg);
+        transform: rotateY(0deg);
     }
 }
 
