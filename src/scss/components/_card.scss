@@ -1,9 +1,14 @@
 // Globale Karten-Stile
 .card {
-    height: 100px;
-    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--card-aspect-ratio, 105 / 120);
+    box-sizing: border-box;
+    display: block;
     background-color: transparent;
     border: none;
+    margin: 0;
+    padding: 0;
 
     &__inner {
         position: relative;
@@ -19,7 +24,7 @@
         inset: 0;
         background-image: var(--card-face);
         background-position: center;
-        background-size: contain;
+        background-size: var(--card-bg-size, 100%);
         background-repeat: no-repeat;
         backface-visibility: hidden;
 
@@ -27,7 +32,7 @@
             transform: rotateY(180deg);
             background-image: none;
             background-position: center;
-            background-size: contain;
+            background-size: var(--card-bg-size, 100%);
             background-repeat: no-repeat;
         }
     }

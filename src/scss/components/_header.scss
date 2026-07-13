@@ -2,22 +2,30 @@
 @use "../base/colors" as *;
 
 #gameHeader {
-  @include mixin.flexColumn(center, row, 12px, space-between);
+  @include mixin.flexColumn(center, row, var(--theme-header-gap, 12px), space-between);
   position: fixed;
-  top: 0;
-  width: 1217px;
-  max-width: 1440px;
-  margin: 41px 112px;
-  height: 62px;
+  top: var(--theme-header-top, 0);
+  width: var(--theme-header-width, 1217px);
+  max-width: var(--theme-header-max-width, 1440px);
+  margin: var(--theme-header-margin, 41px 112px);
+  height: var(--theme-header-height, 62px);
+  font-family: var(--theme-font-family);
+  font-weight: var(--theme-font-weight);
+  font-size: var(--theme-font-size);
+  line-height: var(--theme-line-height);
+  letter-spacing: var(--theme-letter-spacing);
+  color: var(--theme-header-text-color);
 
   @include mixin.themedSurface(var(--bg-color-header), var(--theme-header-radius), var(--theme-header-padding));
+  box-shadow: var(--theme-header-shadow);
   --scoreboard-label-blue: var(--theme-scoreboard-label-blue);
   --scoreboard-label-orange: var(--theme-scoreboard-label-orange);
 
   & #scoreBoard {
-    @include mixin.flexColumn(center, row, 12px, space-between);
-    gap: 12px;
-    height: 62px;
+    @include mixin.flexColumn(center, row, var(--theme-scoreboard-gap, 12px), space-between);
+    width: var(--theme-scoreboard-width, 293px);
+    height: var(--theme-scoreboard-height, 62px);
+   
     @include mixin.themedSurface(
       var(--theme-scoreboard-bg),
       var(--theme-scoreboard-radius),
@@ -25,17 +33,30 @@
       var(--theme-scoreboard-border),
       var(--theme-scoreboard-text-color)
     );
+    box-shadow: var(--theme-scoreboard-shadow);
   }
 
   .scoreBoardEntry {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--theme-scoreboard-chip-gap, 8px);
+    padding: var(--theme-scoreboard-chip-padding);
+    border-radius: var(--theme-scoreboard-chip-radius);
+
+    &--blue {
+      background: var(--theme-scoreboard-chip-bg-blue);
+      color: var(--theme-scoreboard-chip-text-blue, var(--theme-scoreboard-name-color));
+    }
+
+    &--orange {
+      background: var(--theme-scoreboard-chip-bg-orange);
+      color: var(--theme-scoreboard-chip-text-orange, var(--theme-scoreboard-name-color));
+    }
   }
 
   .scoreBoardLabel {
-    width: 24px;
-    height: 20px;
+    width: var(--theme-scoreboard-label-width, 24px);
+    height: var(--theme-scoreboard-label-height, 20px);
     display: block;
     flex-shrink: 0;
     background-position: center;
@@ -55,7 +76,7 @@
     @include mixin.flexColumn(center, row, 0);
 
     a {
-      @include mixin.flexColumn(center, row, 8px);
+      @include mixin.flexColumn(center, row, var(--theme-exit-gap, 10px));
       @include mixin.themedSurface(
         var(--theme-exit-bg),
         var(--theme-exit-radius),
@@ -63,18 +84,48 @@
         var(--theme-exit-border),
         var(--theme-exit-text-color)
       );
+      min-width: var(--theme-exit-min-width, auto);
+      min-height: var(--theme-exit-min-height, auto);
+      box-sizing: border-box;
+      box-shadow: var(--theme-exit-shadow);
       text-decoration: none;
+      font-family: var(--theme-exit-font-family, var(--theme-font-family));
+      font-weight: var(--theme-exit-font-weight, var(--theme-font-weight));
+      font-size: var(--theme-exit-font-size, var(--theme-font-size));
+      line-height: var(--theme-exit-line-height, var(--theme-line-height));
+      letter-spacing: var(--theme-exit-letter-spacing, var(--theme-letter-spacing));
+
+      img {
+        width: var(--theme-exit-icon-width, 25.75px);
+        height: var(--theme-exit-icon-height, 22.5px);
+        flex-shrink: 0;
+      }
     }
   }
 
   .scoreBoardPlayerName,
   .scoreBoardValue {
     margin: 0;
-    color: var(--theme-scoreboard-text-color);
+    color: inherit;
+    font-family: var(--theme-scoreboard-label-font-family);
+    font-weight: var(--theme-scoreboard-label-font-weight);
+    font-size: var(--theme-scoreboard-label-font-size);
+    line-height: var(--theme-scoreboard-label-line-height);
+    letter-spacing: var(--theme-scoreboard-label-letter-spacing);
+  }
+
+  body[data-theme="codeVibes"] & .scoreBoardEntry--blue .scoreBoardValue::before {
+    content: var(--theme-scoreboard-chip-label-blue, "Blue");
+    margin-right: var(--theme-scoreboard-chip-label-gap, 8px);
+  }
+
+  body[data-theme="codeVibes"] & .scoreBoardEntry--orange .scoreBoardValue::before {
+    content: var(--theme-scoreboard-chip-label-orange, "Orange");
+    margin-right: var(--theme-scoreboard-chip-label-gap, 8px);
   }
 
   #currentPlayer {
-    @include mixin.flexColumn(center, row, 8px);
+    @include mixin.flexColumn(center, row, var(--theme-current-player-gap, 8px));
     @include mixin.themedSurface(
       var(--theme-current-player-bg),
       var(--theme-current-player-radius),
@@ -82,15 +133,27 @@
       var(--theme-current-player-border),
       var(--theme-current-player-text-color)
     );
-    gap: 8px;
+    box-shadow: var(--theme-current-player-shadow);
+    gap: var(--theme-current-player-gap, 8px);
 
-    p {
+    #current-player-label {
       margin: 0;
+      color: var(--theme-current-player-label-color);
+      font-family: var(--theme-current-player-label-font-family, var(--theme-font-family));
+      font-weight: var(--theme-current-player-label-font-weight, var(--theme-font-weight));
+      font-size: var(--theme-current-player-label-font-size, var(--theme-font-size));
+      line-height: var(--theme-current-player-label-line-height, var(--theme-line-height));
+      letter-spacing: var(--theme-current-player-label-letter-spacing, var(--theme-letter-spacing));
     }
   }
 
   #currentPlayerTag {
-    @include mixin.flexColumn(center, row, 8px);
-    color: var(--theme-current-player-text-color);
+    @include mixin.flexColumn(center, row, var(--theme-current-player-tag-gap, 8px));
+    color: var(--theme-current-player-value-color);
+    font-family: var(--theme-current-player-value-font-family, var(--theme-font-family));
+    font-weight: var(--theme-current-player-value-font-weight, var(--theme-font-weight));
+    font-size: var(--theme-current-player-value-font-size, var(--theme-font-size));
+    line-height: var(--theme-current-player-value-line-height, var(--theme-line-height));
+    letter-spacing: var(--theme-current-player-value-letter-spacing, var(--theme-letter-spacing));
   }
 }

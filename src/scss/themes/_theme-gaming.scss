@@ -1,26 +1,46 @@
 body[data-theme='gaming'] {
-  --bg-color-header: transparent;
-  --theme-header-radius: 0;
-  --theme-header-padding: 0;
+  --theme-font-family: 'Orbitron', sans-serif;
+  --theme-font-weight: 700;
+  --theme-font-size: 8px;
+  --theme-line-height: 100%;
+  --theme-letter-spacing: 0.56px;
+  --theme-header-text-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-name-color: rgba(41, 79, 96, 1);
+  --theme-scoreboard-value-color: rgba(41, 79, 96, 1);
+  --theme-current-player-label-color: rgba(255, 255, 255, 1);
+  --theme-current-player-value-color: rgba(56, 178, 255, 1);
+  
+  --bg-color-header: rgba(92, 102, 135, 0.96);
+  --theme-header-radius: 18px;
+  --theme-header-padding: 14px 26px;
+  --theme-header-shadow: none;
 
   --bg-color-theme: linear-gradient(226.04deg, #294f60 19.4%, #2086b4 111.63%);
   --theme-scoreboard-bg: rgba(255, 255, 255, 1);
   --theme-scoreboard-border: none;
-  --theme-scoreboard-radius: 12px;
-  --theme-scoreboard-padding: 0 12px;
+  --theme-scoreboard-radius: 8px;
+  --theme-scoreboard-width: 182px;
+  --theme-scoreboard-height: 54px;
+  --theme-scoreboard-padding: 10px 14px;
+  --theme-scoreboard-shadow: none;
   --theme-scoreboard-text-color: rgba(41, 79, 96, 1);
   --theme-scoreboard-label-blue: url("/assets/theme_files/gaming/label_blue.svg");
   --theme-scoreboard-label-orange: url("/assets/theme_files/gaming/label_orange.svg");
 
-  --theme-current-player-bg:none;
+  --theme-current-player-bg: transparent;
   --theme-current-player-border: none;
-  --theme-current-player-radius: 12px;
-  --theme-current-player-padding: 6px 10px;
-  --theme-current-player-text-color: rgba(41, 79, 96, 1);
+  --theme-current-player-radius: 0;
+  --theme-current-player-padding: 0;
+  --theme-current-player-shadow: none;
+  --theme-current-player-text-color: rgba(255, 255, 255, 1);
 
-  --theme-exit-bg: rgba(255, 255, 255, 0.95);
-  --theme-exit-border: none;
-  --theme-exit-radius: 12px;
-  --theme-exit-padding: 8px 12px;
-  --theme-exit-text-color: rgba(41, 79, 96, 1);
+  --theme-exit-bg: rgba(237, 27, 118, 0.08);
+  --theme-exit-border: 2px solid rgba(255, 34, 112, 1);
+  --theme-exit-radius: 10px;
+  --theme-exit-padding: 12px 20px;
+  --theme-exit-gap: 10px;
+  --theme-exit-min-width: 195px;
+  --theme-exit-min-height: 54px;
+  --theme-exit-shadow: none;
+  --theme-exit-text-color: rgba(255, 255, 255, 1);
 }

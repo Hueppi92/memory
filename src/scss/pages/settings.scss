@@ -12,11 +12,11 @@ body {
 #settingsContainer {
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: flex-start;
   gap: 361px;
-  margin-left: 50px;
-  height: 500px;
-  padding-left: 178px;
+  width: 1103px;
+  min-height: 539px;
+  margin: 0 auto;
 
   & p {
     font-family: $font-family-almarai;
@@ -37,9 +37,8 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 50px;
-  margin-left: 56px;
-  padding-left: 178px;
+  width: 1103px;
+  margin: 50px auto 0;
 
   & h1 {
     font-size: 54px;
@@ -62,14 +61,41 @@ body {
 }
 
 #gameSettings {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 539px;
+
+  label {
+    font-family: $font-family-almarai;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0;
+
+    &:has(input:checked),
+    &:hover,
+    &:focus-within {
+      font-weight: 700;
+    }
+  }
+
   & p img {
     padding-right: 8px;
   }
 }
 
+#themeSettings ul {
+  min-width: 260px;
+}
+
+#themeSettings label {
+  white-space: nowrap;
+}
+
 ul {
   margin: 0;
-  padding-bottom: 55px;
+  padding-bottom: 0;
   @include mixin.flexColumn(start, column, 13px);
   min-width: 200px;
 
@@ -78,13 +104,14 @@ ul {
     padding-left: 8px;
   }
 }
+
 #preview_gameBar {
-  @include mixin.flexColumn(flex-end, column, 13px);
+  @include mixin.flexColumn(flex-end, column, 45px);
+  min-height: 539px;
 
   & img#themePreview {
-    width: 430px;
-    height: 378px;
-    gap: 45px;
+    width: 460px;
+    height: 412px;
   }
   & #gameBar {
     background-color: $color-surface;

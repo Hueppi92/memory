@@ -6,11 +6,11 @@
    justify-content: $justify;
 }
 
-@mixin themedSurface($background: null, $radius: null, $padding: null, $border: null, $textColor: null) {
+@mixin themedSurface($background: null, $radius: null, $padding: null, $border: null, $textColor: null, $height: null, $width: null) {
    @if $background != null {
       background: $background;
    }
-
+   
    @if $radius != null {
       border-radius: $radius;
    }
@@ -25,5 +25,13 @@
 
    @if $textColor != null {
       color: $textColor;
+   }
+
+   @if $height != null {
+      height: $height;
+   }
+
+   @if $width != null {
+      width: $width;
    }
 }

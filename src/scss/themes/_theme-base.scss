@@ -1,26 +1,52 @@
-:root {
+/*
+ * Theme template only.
+ * This file is intentionally NOT imported in _index.scss.
+ * Copy this block when creating a new theme and replace the values.
+ */
+
+body[data-theme='yourThemeId'] {
+  --theme-font-family: 'Almarai', sans-serif;
+  --theme-font-weight: 400;
+  --theme-font-size: 10px;
+  --theme-line-height: 100%;
+  --theme-letter-spacing: 0;
+
+  --theme-header-text-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-name-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-value-color: rgba(255, 255, 255, 1);
+  --theme-current-player-label-color: rgba(255, 255, 255, 1);
+  
+
   --bg-color-header: transparent;
   --theme-header-radius: 0;
   --theme-header-padding: 0;
+  --theme-header-shadow: none;
 
-  --bg-color-theme: linear-gradient(223.71deg, #303131 43.86%, #6d6d6d 122.2%);
-  --theme-scoreboard-bg: rgba(255, 255, 255, 0.16);
+  --bg-color-theme: rgba(255, 255, 255, 1);
+
+  --theme-scoreboard-bg: transparent;
   --theme-scoreboard-border: none;
   --theme-scoreboard-radius: 0;
-  --theme-scoreboard-padding: 0 12px;
+  --theme-scoreboard-padding: 0;
+  --theme-scoreboard-shadow: none;
   --theme-scoreboard-text-color: rgba(255, 255, 255, 1);
-  --theme-scoreboard-label-blue: url("/assets/theme_files/codeVibes/label_blue.svg");
-  --theme-scoreboard-label-orange: url("/assets/theme_files/codeVibes/label_orange.svg");
+  --theme-scoreboard-label-blue: url('/assets/theme_files/yourThemeId/label_blue.svg');
+  --theme-scoreboard-label-orange: url('/assets/theme_files/yourThemeId/label_orange.svg');
 
   --theme-current-player-bg: transparent;
   --theme-current-player-border: none;
   --theme-current-player-radius: 0;
   --theme-current-player-padding: 0;
+  --theme-current-player-shadow: none;
   --theme-current-player-text-color: rgba(255, 255, 255, 1);
+  --theme-current-player-label-font-family: 'Almarai', sans-serif;
+  --theme-current-player-label-font-weight: 400;
+  --theme-current-player-label-font-size: 26px;
 
   --theme-exit-bg: transparent;
   --theme-exit-border: none;
   --theme-exit-radius: 0;
   --theme-exit-padding: 0;
+  --theme-exit-shadow: none;
   --theme-exit-text-color: rgba(255, 255, 255, 1);
 }

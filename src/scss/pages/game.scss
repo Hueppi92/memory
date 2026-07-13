@@ -2,6 +2,10 @@
 @use '../components/header';
 
 body {
+    --field-gap: 6px;
+    --card-width: 105px;
+    --card-aspect-ratio: 105 / 120;
+    --card-bg-size: 100%;
     --field-columns: 4;
     min-height: 100vh;
     display: flex;
@@ -18,6 +22,9 @@ body[data-board-size='36'] {
 
 #field {
     display: grid;
-    grid-template-columns: repeat(var(--field-columns), minmax(80px, 100px));
-    gap: 12px;
+    grid-template-columns: repeat(
+        var(--field-columns),
+        minmax(var(--card-width), var(--card-width))
+    );
+    gap: var(--field-gap);
 }

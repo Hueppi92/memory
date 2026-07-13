@@ -1,26 +1,43 @@
 body[data-theme='foods'] {
-  --bg-color-header: transparent;
-  --theme-header-radius: 0;
-  --theme-header-padding: 0;
+  --theme-font-family: 'Hannotate SC', 'Marker Felt', 'Comic Sans MS', cursive;
+  --theme-font-weight: 700;
+  --theme-font-size: 10px;
+  --theme-line-height: 100%;
+  --theme-letter-spacing: 0;
+  --theme-header-text-color: rgba(48, 49, 49, 1);
+  --theme-scoreboard-name-color: rgba(48, 49, 49, 1);
+  --theme-scoreboard-value-color: rgba(48, 49, 49, 1);
+  --theme-current-player-label-color: rgba(48, 49, 49, 1);
+  --theme-current-player-value-color: rgba(30, 117, 148, 1);
+  --bg-color-header: rgba(255, 255, 255, 1);
+  --theme-header-radius: 18px;
+  --theme-header-padding: 16px 22px;
+  --theme-header-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 
   --bg-color-theme: rgba(232, 226, 220, 1);
-  --theme-scoreboard-bg: rgba(255, 255, 255, 1);
+  --theme-scoreboard-bg: transparent;
   --theme-scoreboard-border: none;
-  --theme-scoreboard-radius: 12px;
-  --theme-scoreboard-padding: 0 12px;
+  --theme-scoreboard-radius: 0;
+  --theme-scoreboard-padding: 0;
+  --theme-scoreboard-shadow: none;
   --theme-scoreboard-text-color: rgba(48, 49, 49, 1);
   --theme-scoreboard-label-blue: url("/assets/theme_files/foods/label_blue.svg");
   --theme-scoreboard-label-orange: url("/assets/theme_files/foods/label_orange.svg");
 
-  --theme-current-player-bg: none;
+  --theme-current-player-bg: transparent;
   --theme-current-player-border: none;
-  --theme-current-player-radius: 12px;
-  --theme-current-player-padding: 6px 10px;
+  --theme-current-player-radius: 0;
+  --theme-current-player-padding: 0;
+  --theme-current-player-shadow: none;
   --theme-current-player-text-color: rgba(30, 117, 148, 1);
 
-  --theme-exit-bg: rgba(255, 255, 255, 0.95);
-  --theme-exit-border: none;
-  --theme-exit-radius: 12px;
-  --theme-exit-padding: 8px 12px;
-  --theme-exit-text-color: rgba(48, 49, 49, 1);
+  --theme-exit-bg: rgba(255, 249, 242, 1);
+  --theme-exit-border: 2px solid rgba(255, 140, 43, 1);
+  --theme-exit-radius: 10px;
+  --theme-exit-padding: 12px 20px;
+  --theme-exit-gap: 10px;
+  --theme-exit-min-width: 173px;
+  --theme-exit-min-height: 46px;
+  --theme-exit-shadow: none;
+  --theme-exit-text-color: rgba(255, 140, 43, 1);
 }
