@@ -5,3 +5,25 @@
    gap: $gap;
    justify-content: $justify;
 }
+
+@mixin themedSurface($background: null, $radius: null, $padding: null, $border: null, $textColor: null) {
+   @if $background != null {
+      background: $background;
+   }
+
+   @if $radius != null {
+      border-radius: $radius;
+   }
+
+   @if $padding != null {
+      padding: $padding;
+   }
+
+   @if $border != null {
+      border: $border;
+   }
+
+   @if $textColor != null {
+      color: $textColor;
+   }
+}

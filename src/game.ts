@@ -7,6 +7,8 @@ initGamePage();
 
 function initGamePage() {
     const selectedSettings = loadGameSettings();
+    const selectedTheme = selectedSettings.theme ?? DEFAULT_THEME_ID;
+    const selectedPlayer = selectedSettings.player ?? 'blue';
     const fieldRef = document.getElementById('field');
 
     if (!fieldRef) {
@@ -14,11 +16,13 @@ function initGamePage() {
     }
 
     // Keep selected settings accessible on the game page for styling/logic.
-    document.body.dataset.theme = selectedSettings.theme ?? DEFAULT_THEME_ID;
-    document.body.dataset.player = selectedSettings.player ?? '';
+    document.body.dataset.theme = selectedTheme;
+    document.body.dataset.player = selectedPlayer;
     document.body.dataset.boardSize = String(selectedSettings.boardSize ?? '');
 
-    renderCards(fieldRef, selectedSettings.boardSize ?? 16, selectedSettings.theme ?? DEFAULT_THEME_ID);
+    renderCurrentPlayerTag(selectedPlayer);
+
+    renderCards(fieldRef, selectedSettings.boardSize ?? 16, selectedTheme);
 
     fieldRef.addEventListener('click', (e) => {
         const card = (e.target as HTMLElement).closest('.card') as HTMLButtonElement | null;
@@ -76,4 +80,20 @@ function renderCards(fieldRef: HTMLElement, fieldSize: number, theme: string) {
             </div>
         </button>`;
     }
+}
+
+function renderCurrentPlayerTag(player: string) {
+    const currentPlayerTag = document.getElementById('currentPlayerTag');
+
+    if (!currentPlayerTag) {
+        return;
+    }
+
+    const normalizedPlayer = player === 'orange' ? 'orange' : 'blue';
+    const playerLabel = normalizedPlayer === 'orange' ? 'Orange' : 'Blue';
+
+    currentPlayerTag.innerHTML = `
+        <span class="scoreBoardLabel scoreBoardLabel--${normalizedPlayer}" aria-hidden="true"></span>
+        
+    `;
 }

@@ -8,14 +8,26 @@
 <body>
     <header id="gameHeader">
         <div id="scoreBoard">
-            <span class="scoreBoardLabel scoreBoardLabel--blue" aria-hidden="true"></span>
-            <span class="scoreBoardLabel scoreBoardLabel--orange" aria-hidden="true"></span>
+            <div class="scoreBoardEntry scoreBoardEntry--blue">
+                <span class="scoreBoardLabel scoreBoardLabel--blue" aria-hidden="true"></span>
+                <p class="scoreBoardPlayerName">Blue</p>
+                <p id="blueScoreValue" class="scoreBoardValue">0</p>
+            </div>
+
+            <div class="scoreBoardEntry scoreBoardEntry--orange">
+                <span class="scoreBoardLabel scoreBoardLabel--orange" aria-hidden="true"></span>
+                <p class="scoreBoardPlayerName">Orange</p>
+                <p id="orangeScoreValue" class="scoreBoardValue">0</p>
+            </div>
         </div>
-        <div id="currentPlayer"><p>Current Player</p> <p id="currentPlayerTag"></p></div>
+        <div id="currentPlayer">
+            <p>Current Player</p>
+            <div id="currentPlayerTag"></div>
+        </div>
         <div id="exit">
             <a href="settings.html" aria-label="Exit Game">
                 <img src="./assets/exit.svg" alt="" aria-hidden="true" />
-                <span>Exit</span>
+                <span>Exit Game</span>
             </a>
         </div>
     </header>

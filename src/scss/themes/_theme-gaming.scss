@@ -1,0 +1,26 @@
+body[data-theme='gaming'] {
+  --bg-color-header: transparent;
+  --theme-header-radius: 0;
+  --theme-header-padding: 0;
+
+  --bg-color-theme: linear-gradient(226.04deg, #294f60 19.4%, #2086b4 111.63%);
+  --theme-scoreboard-bg: rgba(255, 255, 255, 1);
+  --theme-scoreboard-border: none;
+  --theme-scoreboard-radius: 12px;
+  --theme-scoreboard-padding: 0 12px;
+  --theme-scoreboard-text-color: rgba(41, 79, 96, 1);
+  --theme-scoreboard-label-blue: url("/assets/theme_files/gaming/label_blue.svg");
+  --theme-scoreboard-label-orange: url("/assets/theme_files/gaming/label_orange.svg");
+
+  --theme-current-player-bg:none;
+  --theme-current-player-border: none;
+  --theme-current-player-radius: 12px;
+  --theme-current-player-padding: 6px 10px;
+  --theme-current-player-text-color: rgba(41, 79, 96, 1);
+
+  --theme-exit-bg: rgba(255, 255, 255, 0.95);
+  --theme-exit-border: none;
+  --theme-exit-radius: 12px;
+  --theme-exit-padding: 8px 12px;
+  --theme-exit-text-color: rgba(41, 79, 96, 1);
+}

@@ -1,13 +1,14 @@
 @use '../components/card';
 @use '../components/header';
 
-
 body {
     --field-columns: 4;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: var(--bg-color-theme);
+    transition: background 200ms ease;
 }
 
 body[data-board-size='24'],

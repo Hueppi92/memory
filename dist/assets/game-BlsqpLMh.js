@@ -1,6 +1,0 @@
-import"./main-DJQ-_5Ph.js";import{i as e,n as t,t as n}from"./theme-catalog-8qvECywr.js";r();function r(){let t=e(),r=document.getElementById(`field`);r&&(document.body.dataset.theme=t.theme??n,document.body.dataset.player=t.player??``,document.body.dataset.boardSize=String(t.boardSize??``),o(r,t.boardSize??16,t.theme??n),r.addEventListener(`click`,e=>{let t=e.target.closest(`.card`);t&&t.classList.toggle(`is-flipped`)}))}function i(e,r){let i=t[e]?.cardFaceUrls??t[n]?.cardFaceUrls??[];if(i.length===0)return[];let o=r/2,s=[];for(let e=0;e<o;e++){let t=i[e%i.length];s.push(t,t)}return a(s)}function a(e){let t=[...e];for(let e=t.length-1;e>0;e--){let n=Math.floor(Math.random()*(e+1)),r=t[e];t[e]=t[n],t[n]=r}return t}function o(e,r,a){e.innerHTML=``;let o=i(a,r),s=t[a]?.cardBackUrl??t[n]?.cardBackUrl;for(let t=0;t<o.length;t++){let n=o[t]?` style="background-image: url('${o[t]}')"`:``,r=s?` style="background-image: url('${s}')"`:``;e.innerHTML+=` <button class="card" id="card_${t+1}" aria-label="Card ${t+1}">
-            <div class="card__inner">
-                <div class="card__face"${n}></div>
-                <div class="card__face card__face--back"${r}></div>
-            </div>
-        </button>`}}

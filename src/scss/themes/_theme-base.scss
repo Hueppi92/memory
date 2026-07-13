@@ -1,0 +1,26 @@
+:root {
+  --bg-color-header: transparent;
+  --theme-header-radius: 0;
+  --theme-header-padding: 0;
+
+  --bg-color-theme: linear-gradient(223.71deg, #303131 43.86%, #6d6d6d 122.2%);
+  --theme-scoreboard-bg: rgba(255, 255, 255, 0.16);
+  --theme-scoreboard-border: none;
+  --theme-scoreboard-radius: 0;
+  --theme-scoreboard-padding: 0 12px;
+  --theme-scoreboard-text-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-label-blue: url("/assets/theme_files/codeVibes/label_blue.svg");
+  --theme-scoreboard-label-orange: url("/assets/theme_files/codeVibes/label_orange.svg");
+
+  --theme-current-player-bg: transparent;
+  --theme-current-player-border: none;
+  --theme-current-player-radius: 0;
+  --theme-current-player-padding: 0;
+  --theme-current-player-text-color: rgba(255, 255, 255, 1);
+
+  --theme-exit-bg: transparent;
+  --theme-exit-border: none;
+  --theme-exit-radius: 0;
+  --theme-exit-padding: 0;
+  --theme-exit-text-color: rgba(255, 255, 255, 1);
+}

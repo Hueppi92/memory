@@ -5,24 +5,39 @@
   @include mixin.flexColumn(center, row, 12px, space-between);
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 1217px;
   max-width: 1440px;
   margin: 41px 112px;
   height: 62px;
 
-  --scoreboard-label-blue: url("/assets/theme_files/codeVibes/label_blue.svg");
-  --scoreboard-label-orange: url("/assets/theme_files/codeVibes/label_orange.svg");
+  @include mixin.themedSurface(var(--bg-color-header), var(--theme-header-radius), var(--theme-header-padding));
+  --scoreboard-label-blue: var(--theme-scoreboard-label-blue);
+  --scoreboard-label-orange: var(--theme-scoreboard-label-orange);
+
   & #scoreBoard {
-    display: flex;
-    align-items: center;
+    @include mixin.flexColumn(center, row, 12px, space-between);
     gap: 12px;
     height: 62px;
+    @include mixin.themedSurface(
+      var(--theme-scoreboard-bg),
+      var(--theme-scoreboard-radius),
+      var(--theme-scoreboard-padding),
+      var(--theme-scoreboard-border),
+      var(--theme-scoreboard-text-color)
+    );
+  }
+
+  .scoreBoardEntry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .scoreBoardLabel {
     width: 24px;
     height: 20px;
     display: block;
+    flex-shrink: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -34,5 +49,48 @@
     &--orange {
       background-image: var(--scoreboard-label-orange);
     }
+  }
+
+  & #exit {
+    @include mixin.flexColumn(center, row, 0);
+
+    a {
+      @include mixin.flexColumn(center, row, 8px);
+      @include mixin.themedSurface(
+        var(--theme-exit-bg),
+        var(--theme-exit-radius),
+        var(--theme-exit-padding),
+        var(--theme-exit-border),
+        var(--theme-exit-text-color)
+      );
+      text-decoration: none;
+    }
+  }
+
+  .scoreBoardPlayerName,
+  .scoreBoardValue {
+    margin: 0;
+    color: var(--theme-scoreboard-text-color);
+  }
+
+  #currentPlayer {
+    @include mixin.flexColumn(center, row, 8px);
+    @include mixin.themedSurface(
+      var(--theme-current-player-bg),
+      var(--theme-current-player-radius),
+      var(--theme-current-player-padding),
+      var(--theme-current-player-border),
+      var(--theme-current-player-text-color)
+    );
+    gap: 8px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  #currentPlayerTag {
+    @include mixin.flexColumn(center, row, 8px);
+    color: var(--theme-current-player-text-color);
   }
 }
