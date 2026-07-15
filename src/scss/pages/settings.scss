@@ -55,7 +55,7 @@ body {
     bottom: 0;
     width: 251px;
     height: 18px;
-    background: url("/assets/settings_underline.svg") left center / 100% 130%
+    background: url("/assets/ui/settings_underline.svg") left center / 100% 130%
       no-repeat;
   }
 }
@@ -197,13 +197,13 @@ input[type="radio"] {
   height: 24px;
   margin: 0;
   border: 0;
-  background: url("/assets/unchecked_radio.svg") center / contain no-repeat;
+  background: url("/assets/ui/unchecked_radio.svg") center / contain no-repeat;
   cursor: pointer;
 
   &:checked {
-    background-image: url("/assets/checked_radio.svg");
+    background-image: url("/assets/ui/checked_radio.svg");
   }
   &:hover {
-    background-image: url("/assets/checked_radio.svg");
+    background-image: url("/assets/ui/checked_radio.svg");
   }
 }

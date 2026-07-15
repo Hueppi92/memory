@@ -1,0 +1,74 @@
+body {
+	min-height: 100vh;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--theme-winner-bg, var(--theme-game-over-bg, var(--bg-color-theme)));
+	font-family: var(--theme-font-family);
+}
+
+#winnerContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--theme-winner-content-gap, 20px);
+	text-align: center;
+}
+
+#winnerMessage {
+	margin: 0;
+	color: var(--theme-winner-message-color, var(--theme-game-over-message-color, var(--theme-header-text-color)));
+	font-family: var(--theme-winner-message-font-family, var(--theme-game-over-message-font-family, var(--theme-font-family)));
+	font-weight: var(--theme-winner-message-font-weight, var(--theme-game-over-message-font-weight, var(--theme-font-weight)));
+	font-size: var(--theme-winner-message-font-size, var(--theme-game-over-message-font-size, 24px));
+	line-height: var(--theme-winner-message-line-height, var(--theme-game-over-message-line-height, 100%));
+	letter-spacing: var(--theme-winner-message-letter-spacing, var(--theme-game-over-message-letter-spacing, var(--theme-letter-spacing)));
+}
+
+#winner {
+	margin: 0;
+	color: var(--theme-winner-title-color, var(--theme-game-over-title-color, var(--theme-header-text-color)));
+	font-family: var(--theme-winner-title-font-family, var(--theme-game-over-title-font-family, var(--theme-font-family)));
+	font-weight: var(--theme-winner-title-font-weight, var(--theme-game-over-title-font-weight, var(--theme-font-weight)));
+	font-size: var(--theme-winner-title-font-size, var(--theme-game-over-title-font-size, 48px));
+	line-height: var(--theme-winner-title-line-height, var(--theme-game-over-title-line-height, 100%));
+	letter-spacing: var(--theme-winner-title-letter-spacing, var(--theme-game-over-title-letter-spacing, var(--theme-letter-spacing)));
+	text-transform: var(--theme-winner-title-text-transform, var(--theme-game-over-title-text-transform, none));
+	text-shadow: var(--theme-winner-title-text-shadow, var(--theme-game-over-title-text-shadow, none));
+}
+
+body[data-winner-player='blue'] #winner {
+	color: var(--theme-winner-title-blue-color, var(--theme-scoreboard-value--blue-color, var(--theme-winner-title-color, var(--theme-game-over-title-color, var(--theme-header-text-color)))));
+}
+
+body[data-winner-player='orange'] #winner {
+	color: var(--theme-winner-title-orange-color, var(--theme-scoreboard-value--orange-color, var(--theme-winner-title-color, var(--theme-game-over-title-color, var(--theme-header-text-color)))));
+}
+
+#winnerThemeIcon {
+	width: var(--theme-winner-icon-width, 120px);
+	height: var(--theme-winner-icon-height, 120px);
+	object-fit: contain;
+	display: block;
+}
+
+#winnerBackLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: var(--theme-winner-back-min-height, 46px);
+	padding: var(--theme-winner-back-padding, 10px 18px);
+	margin-top: var(--theme-winner-back-margin-top, 16px);
+	border: var(--theme-winner-back-border, var(--theme-exit-border, 1px solid rgba(77, 213, 188, 1)));
+	border-radius: var(--theme-winner-back-radius, var(--theme-exit-radius, 0));
+	background: var(--theme-winner-back-bg, var(--theme-exit-bg, rgba(134, 233, 214, 0.2)));
+	box-shadow: var(--theme-winner-back-shadow, var(--theme-exit-shadow, none));
+	color: var(--theme-winner-back-color, var(--theme-exit-text-color, rgba(255, 255, 255, 1)));
+	font-family: var(--theme-winner-back-font-family, var(--theme-exit-font-family, var(--theme-font-family)));
+	font-weight: var(--theme-winner-back-font-weight, var(--theme-exit-font-weight, var(--theme-font-weight)));
+	font-size: var(--theme-winner-back-font-size, var(--theme-exit-font-size, 16px));
+	line-height: var(--theme-winner-back-line-height, var(--theme-exit-line-height, 100%));
+	letter-spacing: var(--theme-winner-back-letter-spacing, var(--theme-exit-letter-spacing, var(--theme-letter-spacing)));
+	text-decoration: none;
+}

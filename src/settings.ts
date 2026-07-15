@@ -44,7 +44,7 @@ function renderThemeOptions() {
 	}
 
 	themeList.innerHTML = THEME_CATALOG.map((theme) => {
-		return `<li><label><input type="radio" name="theme" value="${theme.id}" /> ${theme.label} theme <img src="./assets/setting_line.svg" alt="Setting line icon" /></label></li>`;
+		return `<li><label><input type="radio" name="theme" value="${theme.id}" /> ${theme.label} theme <img src="../assets/ui/setting_line.svg" alt="Setting line icon" /></label></li>`;
 	}).join('');
 }
 

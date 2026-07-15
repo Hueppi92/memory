@@ -1,0 +1,73 @@
+@use "../abstract/mixin" as mixin;
+
+#scoreBoard {
+  @include mixin.flexColumn(center, row, var(--theme-scoreboard-gap, 12px), space-between);
+  width: var(--theme-scoreboard-width, 293px);
+  height: var(--theme-scoreboard-height, 62px);
+  @include mixin.themedSurface(
+    var(--theme-scoreboard-bg),
+    var(--theme-scoreboard-radius),
+    var(--theme-scoreboard-padding),
+    var(--theme-scoreboard-border),
+    var(--theme-scoreboard-text-color)
+  );
+  box-shadow: var(--theme-scoreboard-shadow);
+  --scoreboard-label-blue: var(--theme-scoreboard-label-blue);
+  --scoreboard-label-orange: var(--theme-scoreboard-label-orange);
+}
+
+.scoreBoardEntry {
+  display: flex;
+  align-items: center;
+  gap: var(--theme-scoreboard-chip-gap, 8px);
+  padding: var(--theme-scoreboard-chip-padding);
+  border-radius: var(--theme-scoreboard-chip-radius);
+
+  &--blue {
+    background: var(--theme-scoreboard-chip-bg-blue);
+    color: var(--theme-scoreboard-chip-text-blue, var(--theme-scoreboard-name-color));
+  }
+
+  &--orange {
+    background: var(--theme-scoreboard-chip-bg-orange);
+    color: var(--theme-scoreboard-chip-text-orange, var(--theme-scoreboard-name-color));
+  }
+}
+
+.scoreBoardLabel {
+  width: var(--theme-scoreboard-label-width, 24px);
+  height: var(--theme-scoreboard-label-height, 20px);
+  display: block;
+  flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  &--blue {
+    background-image: var(--scoreboard-label-blue);
+  }
+
+  &--orange {
+    background-image: var(--scoreboard-label-orange);
+  }
+}
+
+.scoreBoardValue {
+  margin: 0;
+  color: inherit;
+  font-family: var(--theme-scoreboard-value-font-family, var(--theme-scoreboard-label-font-family));
+  font-weight: var(--theme-scoreboard-value-font-weight, var(--theme-scoreboard-label-font-weight));
+  font-size: var(--theme-scoreboard-value-font-size, var(--theme-scoreboard-label-font-size));
+  line-height: var(--theme-scoreboard-value-line-height, var(--theme-scoreboard-label-line-height));
+  letter-spacing: var(--theme-scoreboard-value-letter-spacing, var(--theme-scoreboard-label-letter-spacing));
+}
+
+body[data-theme="codeVibes"] .scoreBoardEntry--blue .scoreBoardValue::before {
+  content: var(--theme-scoreboard-chip-label-blue, "Blue");
+  margin-right: var(--theme-scoreboard-chip-label-gap, 8px);
+}
+
+body[data-theme="codeVibes"] .scoreBoardEntry--orange .scoreBoardValue::before {
+  content: var(--theme-scoreboard-chip-label-orange, "Orange");
+  margin-right: var(--theme-scoreboard-chip-label-gap, 8px);
+}

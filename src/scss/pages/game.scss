@@ -4,15 +4,19 @@
 body {
     --field-gap: 6px;
     --card-width: 105px;
-    --card-aspect-ratio: 105 / 120;
+    --card-aspect-ratio: 105 / 110;
     --card-bg-size: 100%;
     --field-columns: 4;
+    --theme-game-field-margin-top: 20px;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    padding-top: calc(var(--theme-header-height, 62px) + var(--theme-header-top-gap, 41px));
     background: var(--bg-color-theme);
     transition: background 200ms ease;
+    box-sizing: border-box;
 }
 
 body[data-board-size='24'],
@@ -21,6 +25,7 @@ body[data-board-size='36'] {
 }
 
 #field {
+    margin-top: var(--theme-game-field-margin-top);
     display: grid;
     grid-template-columns: repeat(
         var(--field-columns),

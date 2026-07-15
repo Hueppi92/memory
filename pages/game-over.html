@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory - Game Over</title>
+</head>
+<body>
+    <div id="gameOverContent">
+        <h1 id="gameOverTitle">Game Over</h1>
+        <p id="gameOverMessage">Final score</p>
+        <div id="finalScores">
+            <div id="scoreBoard">
+            <div class="scoreBoardEntry scoreBoardEntry--blue">
+                <span class="scoreBoardLabel scoreBoardLabel--blue" aria-hidden="true"></span>
+               
+                <p id="blueScoreValue" class="scoreBoardValue">0</p>
+            </div>
+
+            <div class="scoreBoardEntry scoreBoardEntry--orange">
+                <span class="scoreBoardLabel scoreBoardLabel--orange" aria-hidden="true"></span>
+                
+                <p id="orangeScoreValue" class="scoreBoardValue">0</p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script type="module" src="/src/game-over.ts"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+import"./main-CDBAt2bu.js";import{a as e,n as t,t as n}from"./theme-catalog-B2anaPKk.js";r();function r(){let t=e().theme??n;document.body.dataset.theme=t,i(t)}function i(e){let r=document.getElementById(`drawThemeIcon`);if(!r)return;let i=t[e]??t[n],a=i?.drawIconUrl;if(a){r.src=a;return}i?.previewUrl&&(r.src=i.previewUrl)}

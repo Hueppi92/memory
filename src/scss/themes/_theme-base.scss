@@ -10,6 +10,7 @@ body[data-theme='yourThemeId'] {
   --theme-font-size: 10px;
   --theme-line-height: 100%;
   --theme-letter-spacing: 0;
+ 
 
   --theme-header-text-color: rgba(255, 255, 255, 1);
   --theme-scoreboard-name-color: rgba(255, 255, 255, 1);
@@ -23,6 +24,40 @@ body[data-theme='yourThemeId'] {
   --theme-header-shadow: none;
 
   --bg-color-theme: rgba(255, 255, 255, 1);
+  --theme-game-over-bg: var(--bg-color-theme);
+  --theme-game-over-content-gap: 20px;
+  --theme-game-over-title-color: var(--theme-header-text-color);
+  --theme-game-over-title-font-family: var(--theme-font-family);
+  --theme-game-over-title-font-weight: var(--theme-font-weight);
+  --theme-game-over-title-font-size: 48px;
+  --theme-game-over-title-line-height: 100%;
+  --theme-game-over-title-letter-spacing: var(--theme-letter-spacing);
+  --theme-game-over-message-color: var(--theme-header-text-color);
+  --theme-game-over-message-font-family: var(--theme-font-family);
+  --theme-game-over-message-font-weight: var(--theme-font-weight);
+  --theme-game-over-message-font-size: 24px;
+  --theme-game-over-message-line-height: 100%;
+  --theme-game-over-message-letter-spacing: var(--theme-letter-spacing);
+
+  /* Winner */
+  --theme-winner-bg: var(--theme-game-over-bg);
+  --theme-winner-content-gap: 20px;
+  --theme-winner-message-color: var(--theme-game-over-message-color);
+  --theme-winner-message-font-family: var(--theme-game-over-message-font-family);
+  --theme-winner-message-font-weight: var(--theme-game-over-message-font-weight);
+  --theme-winner-message-font-size: var(--theme-game-over-message-font-size);
+  --theme-winner-message-line-height: var(--theme-game-over-message-line-height);
+  --theme-winner-message-letter-spacing: var(--theme-game-over-message-letter-spacing);
+  --theme-winner-title-color: var(--theme-game-over-title-color);
+  --theme-winner-title-font-family: var(--theme-game-over-title-font-family);
+  --theme-winner-title-font-weight: var(--theme-game-over-title-font-weight);
+  --theme-winner-title-font-size: var(--theme-game-over-title-font-size);
+  --theme-winner-title-line-height: var(--theme-game-over-title-line-height);
+  --theme-winner-title-letter-spacing: var(--theme-game-over-title-letter-spacing);
+  --theme-winner-title-text-transform: var(--theme-game-over-title-text-transform, none);
+  --theme-winner-title-text-shadow: var(--theme-game-over-title-text-shadow, none);
+  --theme-winner-icon-width: 120px;
+  --theme-winner-icon-height: 120px;
 
   --theme-scoreboard-bg: transparent;
   --theme-scoreboard-border: none;
@@ -39,6 +74,15 @@ body[data-theme='yourThemeId'] {
   --theme-current-player-padding: 0;
   --theme-current-player-shadow: none;
   --theme-current-player-text-color: rgba(255, 255, 255, 1);
+  --theme-current-player-indicator-mask: url('/assets/theme_files/yourThemeId/current_player_mask.svg');
+  --theme-current-player-indicator-blue-bg: rgba(30, 117, 148, 1);
+  --theme-current-player-indicator-orange-bg: rgba(234, 105, 0, 1);
+  --theme-current-player-indicator-icon-color: rgba(255, 255, 255, 1);
+  --theme-current-player-indicator-radius: 4px;
+  --theme-current-player-indicator-glyph-width: 10px;
+  --theme-current-player-indicator-glyph-height: 12px;
+  --theme-current-player-indicator-width: 24px;
+  --theme-current-player-indicator-height: 20px;
   --theme-current-player-label-font-family: 'Almarai', sans-serif;
   --theme-current-player-label-font-weight: 400;
   --theme-current-player-label-font-size: 26px;
@@ -49,4 +93,8 @@ body[data-theme='yourThemeId'] {
   --theme-exit-padding: 0;
   --theme-exit-shadow: none;
   --theme-exit-text-color: rgba(255, 255, 255, 1);
+  --theme-exit-icon-mask: url('/assets/ui/exit.svg');
+  --theme-exit-icon-color: rgba(255, 255, 255, 1);
 }
+
+

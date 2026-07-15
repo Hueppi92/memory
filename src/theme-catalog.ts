@@ -4,10 +4,14 @@ export type ThemeDefinition = {
 	previewUrl: string;
 	cardFaceUrls: string[];
 	cardBackUrl: string;
+	drawIconUrl?: string;
+	winnerIconUrl?: string;
+	winnerBlueIconUrl?: string;
+	winnerOrangeIconUrl?: string;
 };
 
 function buildThemeAssetUrl(themeId: string, fileName: string) {
-	return `./assets/theme_files/${themeId}/${fileName}`;
+	return `../assets/theme_files/${themeId}/${fileName}`;
 }
 
 // General helper: collect all card front images (front_*) from a theme file list.
@@ -117,30 +121,37 @@ export const THEME_CATALOG: ThemeDefinition[] = [
 	{
 		id: 'codeVibes',
 		label: 'Code vibes',
-		previewUrl: './assets/theme_preview/codeVibes.svg',
+		previewUrl: '../assets/theme_preview/codeVibes.svg',
 		cardFaceUrls: collectFrontImageUrls('codeVibes', codeVibesFiles),
 		cardBackUrl: buildThemeAssetUrl('codeVibes', 'back.svg'),
+		drawIconUrl: buildThemeAssetUrl('codeVibes', 'draw.svg'),
 	},
 	{
 		id: 'gaming',
 		label: 'Gaming',
-		previewUrl: './assets/theme_preview/gaming.svg',
+		previewUrl: '../assets/theme_preview/gaming.svg',
 		cardFaceUrls: collectFrontImageUrls('gaming', gamingFiles),
 		cardBackUrl: buildThemeAssetUrl('gaming', 'back.svg'),
+		drawIconUrl: buildThemeAssetUrl('gaming', 'draw.svg'),
+		winnerIconUrl: buildThemeAssetUrl('gaming', 'trophy.svg'),
 	},
 	{
 		id: 'daProjects',
 		label: 'Da projects',
-		previewUrl: './assets/theme_preview/daProjects.svg',
+		previewUrl: '../assets/theme_preview/daProjects.svg',
 		cardFaceUrls: collectFrontImageUrls('daProjects', daProjectsFiles),
 		cardBackUrl: buildThemeAssetUrl('daProjects', 'back.svg'),
+		drawIconUrl: buildThemeAssetUrl('daProjects', 'draw.svg'),
 	},
 	{
 		id: 'foods',
 		label: 'Foods',
-		previewUrl: './assets/theme_preview/foods.svg',
+		previewUrl: '../assets/theme_preview/foods.svg',
 		cardFaceUrls: collectFrontImageUrls('foods', foodsFiles),
 		cardBackUrl: buildThemeAssetUrl('foods', 'back.svg'),
+		drawIconUrl: buildThemeAssetUrl('foods', 'draw.svg'),
+		winnerBlueIconUrl: buildThemeAssetUrl('foods', 'blue_winner.svg'),
+		winnerOrangeIconUrl: buildThemeAssetUrl('foods', 'orange_winner.svg'),
 	},
 ];
 

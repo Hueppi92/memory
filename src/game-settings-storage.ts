@@ -7,7 +7,16 @@ export type GameSettings = {
 	boardSize?: number;
 };
 
+export type GameResult = {
+	winner: 'blue' | 'orange' | 'draw';
+	scores: {
+		blue: number;
+		orange: number;
+	};
+};
+
 const STORAGE_KEY = 'memoryGameSettings';
+const RESULT_STORAGE_KEY = 'memoryGameResult';
 
 const legacyThemeNames: Record<string, string> = {
 	IT_logos: 'codeVibes',
@@ -50,6 +59,34 @@ export function loadGameSettings(): GameSettings {
 export function saveGameSettings(settings: GameSettings) {
 	try {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+	} catch {
+		// Ignore storage errors (private mode, quota, etc.).
+	}
+}
+
+export function loadGameResult(): GameResult | null {
+	try {
+		const rawValue = localStorage.getItem(RESULT_STORAGE_KEY);
+
+		if (!rawValue) {
+			return null;
+		}
+
+		const parsed = JSON.parse(rawValue) as GameResult;
+
+		if (!parsed?.scores) {
+			return null;
+		}
+
+		return parsed;
+	} catch {
+		return null;
+	}
+}
+
+export function saveGameResult(result: GameResult) {
+	try {
+		localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(result));
 	} catch {
 		// Ignore storage errors (private mode, quota, etc.).
 	}

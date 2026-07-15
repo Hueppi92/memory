@@ -1,5 +1,6 @@
 @use "../abstract/mixin" as mixin;
 @use "../base/colors" as *;
+@use "../components/scoreboard";
 
 #gameHeader {
   @include mixin.flexColumn(center, row, var(--theme-header-gap, 12px), space-between);
@@ -18,59 +19,6 @@
 
   @include mixin.themedSurface(var(--bg-color-header), var(--theme-header-radius), var(--theme-header-padding));
   box-shadow: var(--theme-header-shadow);
-  --scoreboard-label-blue: var(--theme-scoreboard-label-blue);
-  --scoreboard-label-orange: var(--theme-scoreboard-label-orange);
-
-  & #scoreBoard {
-    @include mixin.flexColumn(center, row, var(--theme-scoreboard-gap, 12px), space-between);
-    width: var(--theme-scoreboard-width, 293px);
-    height: var(--theme-scoreboard-height, 62px);
-   
-    @include mixin.themedSurface(
-      var(--theme-scoreboard-bg),
-      var(--theme-scoreboard-radius),
-      var(--theme-scoreboard-padding),
-      var(--theme-scoreboard-border),
-      var(--theme-scoreboard-text-color)
-    );
-    box-shadow: var(--theme-scoreboard-shadow);
-  }
-
-  .scoreBoardEntry {
-    display: flex;
-    align-items: center;
-    gap: var(--theme-scoreboard-chip-gap, 8px);
-    padding: var(--theme-scoreboard-chip-padding);
-    border-radius: var(--theme-scoreboard-chip-radius);
-
-    &--blue {
-      background: var(--theme-scoreboard-chip-bg-blue);
-      color: var(--theme-scoreboard-chip-text-blue, var(--theme-scoreboard-name-color));
-    }
-
-    &--orange {
-      background: var(--theme-scoreboard-chip-bg-orange);
-      color: var(--theme-scoreboard-chip-text-orange, var(--theme-scoreboard-name-color));
-    }
-  }
-
-  .scoreBoardLabel {
-    width: var(--theme-scoreboard-label-width, 24px);
-    height: var(--theme-scoreboard-label-height, 20px);
-    display: block;
-    flex-shrink: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-
-    &--blue {
-      background-image: var(--scoreboard-label-blue);
-    }
-
-    &--orange {
-      background-image: var(--scoreboard-label-orange);
-    }
-  }
 
   & #exit {
     @include mixin.flexColumn(center, row, 0);
@@ -95,16 +43,25 @@
       line-height: var(--theme-exit-line-height, var(--theme-line-height));
       letter-spacing: var(--theme-exit-letter-spacing, var(--theme-letter-spacing));
 
-      img {
+      .exitIcon {
         width: var(--theme-exit-icon-width, 25.75px);
         height: var(--theme-exit-icon-height, 22.5px);
+        display: inline-block;
         flex-shrink: 0;
+        background-color: var(--theme-exit-icon-color, var(--theme-exit-img-color, var(--theme-exit-text-color)));
+        -webkit-mask-image: var(--theme-exit-icon-mask, url('/assets/ui/exit.svg'));
+        mask-image: var(--theme-exit-icon-mask, url('/assets/ui/exit.svg'));
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
       }
     }
   }
 
-  .scoreBoardPlayerName,
-  .scoreBoardValue {
+  .scoreBoardPlayerName {
     margin: 0;
     color: inherit;
     font-family: var(--theme-scoreboard-label-font-family);
@@ -112,16 +69,6 @@
     font-size: var(--theme-scoreboard-label-font-size);
     line-height: var(--theme-scoreboard-label-line-height);
     letter-spacing: var(--theme-scoreboard-label-letter-spacing);
-  }
-
-  body[data-theme="codeVibes"] & .scoreBoardEntry--blue .scoreBoardValue::before {
-    content: var(--theme-scoreboard-chip-label-blue, "Blue");
-    margin-right: var(--theme-scoreboard-chip-label-gap, 8px);
-  }
-
-  body[data-theme="codeVibes"] & .scoreBoardEntry--orange .scoreBoardValue::before {
-    content: var(--theme-scoreboard-chip-label-orange, "Orange");
-    margin-right: var(--theme-scoreboard-chip-label-gap, 8px);
   }
 
   #currentPlayer {
@@ -155,5 +102,59 @@
     font-size: var(--theme-current-player-value-font-size, var(--theme-font-size));
     line-height: var(--theme-current-player-value-line-height, var(--theme-line-height));
     letter-spacing: var(--theme-current-player-value-letter-spacing, var(--theme-letter-spacing));
+
+    .currentPlayerIndicator {
+      width: var(--theme-current-player-indicator-width, var(--theme-scoreboard-label-width, 24px));
+      height: var(--theme-current-player-indicator-height, var(--theme-scoreboard-label-height, 20px));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: var(--theme-current-player-indicator-radius, 4px);
+      background-color: var(--theme-current-player-indicator-bg-color, transparent);
+
+      &::before {
+        content: "";
+        width: var(--theme-current-player-indicator-glyph-width, 10px);
+        height: var(--theme-current-player-indicator-glyph-height, 12px);
+        background-color: var(--theme-current-player-indicator-icon-color, rgba(255, 255, 255, 1));
+        -webkit-mask-image: var(--theme-current-player-indicator-mask, var(--scoreboard-label-blue));
+        mask-image: var(--theme-current-player-indicator-mask, var(--scoreboard-label-blue));
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+      }
+
+      &--blue {
+        background-color: var(--theme-current-player-indicator-blue-bg, var(--theme-current-player-value-color));
+      }
+
+      &--orange {
+        background-color: var(--theme-current-player-indicator-orange-bg, rgba(234, 105, 0, 1));
+      }
+    }
+
+    body[data-theme="codeVibes"] & .currentPlayerIndicator {
+      width: var(--theme-scoreboard-label-width, 24px);
+      height: var(--theme-scoreboard-label-height, 20px);
+      display: block;
+      border-radius: 0;
+      background-color: transparent;
+
+      &::before {
+        content: none;
+      }
+
+      &--blue {
+        background-image: var(--scoreboard-label-blue);
+      }
+
+      &--orange {
+        background-image: var(--scoreboard-label-orange);
+      }
+    }
   }
 }

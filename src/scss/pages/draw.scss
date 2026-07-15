@@ -1,0 +1,67 @@
+body {
+	min-height: 100vh;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--theme-draw-bg, var(--theme-game-over-bg, var(--bg-color-theme)));
+	font-family: var(--theme-font-family);
+}
+
+#drawContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--theme-draw-content-gap, 14px);
+	text-align: center;
+}
+
+#drawMessage {
+	margin: 0;
+	color: var(--theme-draw-message-color, var(--theme-game-over-message-color, var(--theme-header-text-color)));
+	font-family: var(--theme-draw-message-font-family, var(--theme-game-over-message-font-family, var(--theme-font-family)));
+	font-weight: var(--theme-draw-message-font-weight, var(--theme-game-over-message-font-weight, var(--theme-font-weight)));
+	font-size: var(--theme-draw-message-font-size, var(--theme-game-over-message-font-size, 24px));
+	line-height: var(--theme-draw-message-line-height, var(--theme-game-over-message-line-height, 100%));
+	letter-spacing: var(--theme-draw-message-letter-spacing, var(--theme-game-over-message-letter-spacing, var(--theme-letter-spacing)));
+}
+
+#drawTitle {
+	margin: 0;
+	color: var(--theme-draw-title-color, var(--theme-game-over-title-color, var(--theme-header-text-color)));
+	font-family: var(--theme-draw-title-font-family, var(--theme-game-over-title-font-family, var(--theme-font-family)));
+	font-weight: var(--theme-draw-title-font-weight, var(--theme-game-over-title-font-weight, var(--theme-font-weight)));
+	font-size: var(--theme-draw-title-font-size, var(--theme-game-over-title-font-size, 96px));
+	line-height: var(--theme-draw-title-line-height, var(--theme-game-over-title-line-height, 100%));
+	letter-spacing: var(--theme-draw-title-letter-spacing, var(--theme-game-over-title-letter-spacing, var(--theme-letter-spacing)));
+	text-transform: var(--theme-draw-title-text-transform, uppercase);
+	text-shadow: var(--theme-draw-title-text-shadow, var(--theme-game-over-title-text-shadow, none));
+}
+
+#drawThemeIcon {
+	width: var(--theme-draw-icon-width, 160px);
+	height: var(--theme-draw-icon-height, 160px);
+	object-fit: contain;
+	display: block;
+	margin-top: 2px;
+}
+
+#drawBackLink {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: var(--theme-draw-back-min-height, 46px);
+	padding: var(--theme-draw-back-padding, 10px 18px);
+	margin-top: var(--theme-draw-back-margin-top, 16px);
+	border: var(--theme-draw-back-border, var(--theme-exit-border, 1px solid rgba(77, 213, 188, 1)));
+	border-radius: var(--theme-draw-back-radius, var(--theme-exit-radius, 0));
+	background: var(--theme-draw-back-bg, var(--theme-exit-bg, rgba(134, 233, 214, 0.2)));
+	box-shadow: var(--theme-draw-back-shadow, var(--theme-exit-shadow, none));
+	color: var(--theme-draw-back-color, var(--theme-exit-text-color, rgba(255, 255, 255, 1)));
+	font-family: var(--theme-draw-back-font-family, var(--theme-exit-font-family, var(--theme-font-family)));
+	font-weight: var(--theme-draw-back-font-weight, var(--theme-exit-font-weight, var(--theme-font-weight)));
+	font-size: var(--theme-draw-back-font-size, var(--theme-exit-font-size, 16px));
+	line-height: var(--theme-draw-back-line-height, var(--theme-exit-line-height, 100%));
+	letter-spacing: var(--theme-draw-back-letter-spacing, var(--theme-exit-letter-spacing, var(--theme-letter-spacing)));
+	text-decoration: none;
+}

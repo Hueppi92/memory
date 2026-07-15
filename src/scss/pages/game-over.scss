@@ -1,0 +1,48 @@
+@use "../abstract/mixin" as mixin;
+@use "../components/scoreboard";
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--theme-game-over-bg, var(--bg-color-theme));
+	font-family: var(--theme-font-family);
+	color: var(--theme-header-text-color);
+}
+
+#gameOverContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--theme-game-over-content-gap, 20px);
+}
+
+#gameOverTitle {
+	margin-bottom: var(--theme-game-over-title-margin-bottom, 20px);
+	color: var(--theme-game-over-title-color, var(--theme-header-text-color));
+	font-family: var(--theme-game-over-title-font-family, var(--theme-font-family));
+	font-weight: var(--theme-game-over-title-font-weight, var(--theme-font-weight));
+	font-size: var(--theme-game-over-title-font-size, 48px);
+	line-height: var(--theme-game-over-title-line-height, 100%);
+	letter-spacing: var(--theme-game-over-title-letter-spacing, var(--theme-letter-spacing));
+	text-transform: var(--theme-game-over-title-text-transform, none);
+	text-shadow: var(--theme-game-over-title-text-shadow, none);
+}
+
+#gameOverMessage {
+	margin: 0;
+	color: var(--theme-game-over-message-color, var(--theme-header-text-color));
+	font-family: var(--theme-game-over-message-font-family, var(--theme-font-family));
+	font-weight: var(--theme-game-over-message-font-weight, var(--theme-font-weight));
+	font-size: var(--theme-game-over-message-font-size, 24px);
+	line-height: var(--theme-game-over-message-line-height, 100%);
+	letter-spacing: var(--theme-game-over-message-letter-spacing, var(--theme-letter-spacing));
+	text-shadow: var(--theme-game-over-message-text-shadow, none);
+}
+
+#finalScores {
+	display: flex;
+	justify-content: center;
+}

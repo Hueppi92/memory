@@ -11,26 +11,6 @@ body[data-theme='codeVibes'] {
   --theme-header-max-width: 1440px;
   --theme-header-margin: 41px 112px;
   --theme-header-height: 62px;
-  --theme-scoreboard-name-color: rgba(255, 255, 255, 1);
-  --theme-scoreboard-value-color: rgba(255, 255, 255, 1);
-  --theme-scoreboard-gap: 12px;
-  --theme-scoreboard-width: 293px;
-  --theme-scoreboard-height: 62px;
-  --theme-scoreboard-label-font-family: 'Red Rose', sans-serif;
-  --theme-scoreboard-label-font-weight: 700;
-  --theme-scoreboard-label-font-size: 24px;
-  --theme-scoreboard-label-line-height: 100%;
-  --theme-scoreboard-label-letter-spacing: 0;
-  --theme-scoreboard-label-width: 24px;
-  --theme-scoreboard-label-height: 20px;
-  --theme-scoreboard-chip-gap: 8px;
-  --theme-scoreboard-chip-padding: 0;
-  --theme-scoreboard-chip-radius: 0;
-  --theme-scoreboard-chip-bg-blue: transparent;
-  --theme-scoreboard-chip-bg-orange: transparent;
-  --theme-scoreboard-chip-text-blue: rgba(43, 177, 255, 1);
-  --theme-scoreboard-chip-text-orange: rgba(245, 142, 57, 1);
-  --theme-scoreboard-chip-label-gap: 8px;
   --theme-current-player-label-color: rgba(255, 255, 255, 1);
   --theme-current-player-value-color: rgba(56, 178, 255, 1);
   --theme-current-player-gap: 8px;
@@ -39,18 +19,74 @@ body[data-theme='codeVibes'] {
   --theme-header-padding: 12px 26px;
   --theme-header-shadow: none;
 
- 
   --bg-color-theme: linear-gradient(223.71deg, #303131 43.86%, #6d6d6d 122.2%);
+
+  /* Game over */
+  --theme-game-over-bg: var(--bg-color-theme);
+  --theme-game-over-title-color: rgba(77, 213, 188, 1);
+  --theme-game-over-message-color: rgba(255, 255, 255, 1);
+  --theme-game-over-title-font-family: 'Red Rose';
+  --theme-game-over-title-font-weight: 700;
+  --theme-game-over-message-font-family: 'Red Rose';
+  --theme-game-over-message-font-weight: 400;
+  --theme-game-over-title-font-size: 124px;
+  --theme-game-over-title-line-height: 100%;
+  --theme-game-over-title-letter-spacing: 0;
+  --theme-game-over-message-font-size: 24px;
+  --theme-game-over-message-line-height: 100%;
+  --theme-game-over-message-letter-spacing: 0;
+
+  /* Winner */
+  --theme-winner-bg: var(--theme-game-over-bg);
+  --theme-winner-content-gap: 20px;
+  --theme-winner-message-color: var(--theme-game-over-message-color);
+  --theme-winner-message-font-family: var(--theme-game-over-message-font-family);
+  --theme-winner-message-font-weight: var(--theme-game-over-message-font-weight);
+  --theme-winner-message-font-size: var(--theme-game-over-message-font-size);
+  --theme-winner-message-line-height: var(--theme-game-over-message-line-height);
+  --theme-winner-message-letter-spacing: var(--theme-game-over-message-letter-spacing);
+  --theme-winner-title-color: var(--theme-game-over-title-color);
+  --theme-winner-title-font-family: var(--theme-game-over-title-font-family);
+  --theme-winner-title-font-weight: var(--theme-game-over-title-font-weight);
+  --theme-winner-title-font-size: var(--theme-game-over-title-font-size);
+  --theme-winner-title-line-height: var(--theme-game-over-title-line-height);
+  --theme-winner-title-letter-spacing: var(--theme-game-over-title-letter-spacing);
+  --theme-winner-title-text-transform: var(--theme-game-over-title-text-transform, none);
+  --theme-winner-title-text-shadow: var(--theme-game-over-title-text-shadow, none);
+  --theme-winner-icon-width: 120px;
+  --theme-winner-icon-height: 120px;
+
+  /* Scoreboard */
+  --theme-scoreboard-name-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-value-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-gap: 12px;
+  --theme-scoreboard-width: 293px;
+  --theme-scoreboard-height: 62px;
   --theme-scoreboard-bg: rgba(103, 148, 142, 0.9);
   --theme-scoreboard-border: none;
   --theme-scoreboard-radius: 0;
   --theme-scoreboard-padding: 10px 14px;
   --theme-scoreboard-shadow: none;
   --theme-scoreboard-text-color: rgba(255, 255, 255, 1);
+  --theme-scoreboard-label-font-family: 'Red Rose', sans-serif;
+  --theme-scoreboard-label-font-weight: 700;
+  --theme-scoreboard-label-font-size: 24px;
+  --theme-scoreboard-label-line-height: 100%;
+  --theme-scoreboard-label-letter-spacing: 0;
+  --theme-scoreboard-label-width: 24px;
+  --theme-scoreboard-label-height: 20px;
   --theme-scoreboard-label-blue: url("/assets/theme_files/codeVibes/label_blue.svg");
+  --theme-scoreboard-label-orange: url("/assets/theme_files/codeVibes/label_orange.svg");
+  --theme-scoreboard-chip-gap: 8px;
+  --theme-scoreboard-chip-padding: 0;
+  --theme-scoreboard-chip-radius: 0;
+  --theme-scoreboard-chip-bg-blue: transparent;
+  --theme-scoreboard-chip-bg-orange: transparent;
+  --theme-scoreboard-chip-text-blue: rgba(43, 177, 255, 1);
+  --theme-scoreboard-chip-text-orange: rgba(245, 142, 57, 1);
+  --theme-scoreboard-chip-label-gap: 8px;
   --theme-scoreboard-chip-label-blue: "Blue";
   --theme-scoreboard-chip-label-orange: "Orange";
-  --theme-scoreboard-label-orange: url("/assets/theme_files/codeVibes/label_orange.svg");
 
   --theme-current-player-bg: transparent;
   --theme-current-player-border: none;
@@ -62,7 +98,7 @@ body[data-theme='codeVibes'] {
   --theme-current-player-label-letter-spacing: 0;
   --theme-current-player-label-line-height: 100%;
   --theme-current-player-label-font-weight: 400;
-    --theme-current-player-label-font-size: 26px;
+  --theme-current-player-label-font-size: 26px;
 
   --theme-exit-bg: rgba(134, 233, 214, 0.2);
   --theme-exit-border: 1px solid rgba(77, 213, 188, 1);
@@ -80,4 +116,5 @@ body[data-theme='codeVibes'] {
   --theme-exit-font-size: 24px;
   --theme-exit-line-height: 100%;
   --theme-exit-letter-spacing: 0;
+  
 }
