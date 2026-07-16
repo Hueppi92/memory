@@ -35,6 +35,17 @@
        
     </section>
 
+    <div id="exitConfirmOverlay" role="presentation" aria-hidden="true">
+        <div id="exitConfirmDialog" role="dialog" aria-modal="true" aria-labelledby="exitConfirmTitle" aria-describedby="exitConfirmMessage">
+            <h2 id="exitConfirmTitle">Leave game?</h2>
+            <p id="exitConfirmMessage">Your current game progress will be lost.</p>
+            <div id="exitConfirmActions">
+                <button id="exitConfirmCancel" class="exitConfirmButton exitConfirmButton--cancel" type="button">Back to game</button>
+                <button id="exitConfirmConfirm" class="exitConfirmButton exitConfirmButton--confirm" type="button">Exit game</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="/src/game.ts"></script>
 </body>
 </html>

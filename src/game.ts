@@ -28,6 +28,7 @@ function initGamePage() {
     syncTurnUi();
 
     renderCards(fieldRef, boardSize, selectedTheme);
+    setupExitConfirmPopup();
 
     fieldRef.addEventListener('click', (e) => {
         const card = (e.target as HTMLElement).closest('.card') as HTMLButtonElement | null;
@@ -67,6 +68,54 @@ function initGamePage() {
 
         window.location.href = '/pages/game-over.html';
     }
+}
+
+function setupExitConfirmPopup() {
+    const exitLink = document.querySelector('#exit a') as HTMLAnchorElement | null;
+    const overlay = document.getElementById('exitConfirmOverlay');
+    const cancelButton = document.getElementById('exitConfirmCancel') as HTMLButtonElement | null;
+    const confirmButton = document.getElementById('exitConfirmConfirm') as HTMLButtonElement | null;
+
+    if (!exitLink || !overlay || !cancelButton || !confirmButton) {
+        return;
+    }
+
+    const targetUrl = exitLink.href;
+
+    const closePopup = () => {
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        exitLink.focus();
+    };
+
+    const openPopup = () => {
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        cancelButton.focus();
+    };
+
+    exitLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        openPopup();
+    });
+
+    cancelButton.addEventListener('click', closePopup);
+
+    confirmButton.addEventListener('click', () => {
+        window.location.href = targetUrl;
+    });
+
+    overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+            closePopup();
+        }
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
+            closePopup();
+        }
+    });
 }
 
 function syncTurnUi() {

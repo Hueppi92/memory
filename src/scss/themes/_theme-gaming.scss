@@ -13,7 +13,10 @@ body[data-theme='gaming'] {
   --theme-header-shadow: none;
   --theme-header-height:102px;
 
-    --card-bg-size: cover;
+    --card-bg-size: auto;
+    --theme-card-radius: 12px;
+    --card-front-bg-size: auto;
+    --card-back-bg-size: auto;
 
   --bg-color-theme: linear-gradient(226.04deg, #294f60 19.4%, #2086b4 111.63%);
   --theme-game-over-bg: var(--bg-color-theme);
@@ -32,6 +35,46 @@ body[data-theme='gaming'] {
   --theme-game-over-message-line-height: 100%;
   --theme-game-over-message-letter-spacing: 0.56px;
 
+  /* Draw */
+  --theme-draw-bg: var(--theme-game-over-bg);
+  --theme-draw-content-gap: 14px;
+  --theme-draw-message-color: var(--theme-game-over-message-color);
+  --theme-draw-message-font-family: var(--theme-game-over-message-font-family);
+  --theme-draw-message-font-weight: var(--theme-game-over-message-font-weight);
+  --theme-draw-message-font-size: var(--theme-game-over-message-font-size);
+  --theme-draw-message-line-height: var(--theme-game-over-message-line-height);
+  --theme-draw-message-letter-spacing: var(--theme-game-over-message-letter-spacing);
+  --theme-draw-title-color: var(--theme-game-over-title-color);
+  --theme-draw-title-font-family: var(--theme-game-over-title-font-family);
+  --theme-draw-title-font-weight: var(--theme-game-over-title-font-weight);
+  --theme-draw-title-font-size: 128px;
+  --theme-draw-title-line-height: var(--theme-game-over-title-line-height);
+  --theme-draw-title-letter-spacing: var(--theme-game-over-title-letter-spacing);
+  --theme-draw-title-text-transform: var(--theme-game-over-title-text-transform, uppercase);
+  --theme-draw-title-text-shadow:  4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  
+  --theme-draw-icon-width: 339px;
+  --theme-draw-icon-height: 272px;
+  --theme-draw-back-min-height: var(--theme-exit-min-height, 46px);
+  --theme-draw-back-padding: var(--theme-exit-padding, 10px 18px);
+  --theme-draw-back-margin-top: 64px;
+  --theme-draw-back-border: var(--theme-exit-border, 1px solid rgba(77, 213, 188, 1));
+  --theme-draw-back-radius: var(--theme-exit-radius, 0);
+  --theme-draw-back-bg: var(--theme-exit-bg, rgba(134, 233, 214, 0.2));
+  --theme-draw-back-shadow: var(--theme-exit-shadow, none);
+  --theme-draw-back-color: var(--theme-exit-text-color, rgba(255, 255, 255, 1));
+  --theme-draw-back-font-family: var(--theme-exit-font-family, var(--theme-font-family));
+  --theme-draw-back-font-weight: var(--theme-exit-font-weight, var(--theme-font-weight));
+  --theme-draw-back-font-size: var(--theme-exit-font-size, 16px);
+  --theme-draw-back-line-height: var(--theme-exit-line-height, 100%);
+  --theme-draw-back-letter-spacing: var(--theme-exit-letter-spacing, var(--theme-letter-spacing));
+
+  /* Matched card */
+  --theme-card-matched-border: 2px solid rgba(255, 34, 112, 1);
+  --theme-card-matched-inset: 0px;
+  --theme-card-matched-radius: 12px;
+  --theme-card-matched-shadow: none;
+
   /* Winner */
   --theme-winner-bg: var(--theme-game-over-bg);
   --theme-winner-content-gap: 20px;
@@ -44,13 +87,14 @@ body[data-theme='gaming'] {
   --theme-winner-title-color: var(--theme-game-over-title-color);
   --theme-winner-title-font-family: var(--theme-game-over-title-font-family);
   --theme-winner-title-font-weight: var(--theme-game-over-title-font-weight);
-  --theme-winner-title-font-size: var(--theme-game-over-title-font-size);
+  --theme-winner-title-font-size:64px;
   --theme-winner-title-line-height: var(--theme-game-over-title-line-height);
   --theme-winner-title-letter-spacing: var(--theme-game-over-title-letter-spacing);
   --theme-winner-title-text-transform: var(--theme-game-over-title-text-transform, none);
   --theme-winner-title-text-shadow: var(--theme-game-over-title-text-shadow, none);
-  --theme-winner-icon-width: 120px;
-  --theme-winner-icon-height: 120px;
+  --theme-winner-icon-width: 288px;
+  --theme-winner-icon-height: 344px;
+  --theme-winner-icon-margin-top: 64px;
 
 
   /* Scoreboard */
@@ -116,4 +160,33 @@ body[data-theme='gaming'] {
   --theme-exit-shadow: none;
   --theme-exit-text-color: rgba(255, 255, 255, 1);
   --theme-exit-icon-color: rgba(255, 255, 255, 1);
+
+  /* Exit confirm popup */
+  --theme-exit-confirm-overlay-bg: rgba(18, 27, 38, 0.75);
+  --theme-exit-confirm-bg: rgba(41, 79, 96, 1);
+  --theme-exit-confirm-border: 2px solid rgba(255, 34, 112, 1);
+  --theme-exit-confirm-radius: 14px;
+  --theme-exit-confirm-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --theme-exit-confirm-width: 560px;
+  --theme-exit-confirm-padding: 30px;
+  --theme-exit-confirm-title-color: rgba(255, 34, 112, 1);
+  --theme-exit-confirm-title-font-family: 'Orbitron';
+  --theme-exit-confirm-title-font-weight: 700;
+  --theme-exit-confirm-title-font-size: 52px;
+  --theme-exit-confirm-title-transform: uppercase;
+  --theme-exit-confirm-message-color: rgba(255, 255, 255, 1);
+  --theme-exit-confirm-message-font-family: 'Orbitron';
+  --theme-exit-confirm-message-font-weight: 700;
+  --theme-exit-confirm-message-font-size: 24px;
+  --theme-exit-confirm-message-letter-spacing: 0.56px;
+  --theme-exit-confirm-button-font-family: 'Orbitron';
+  --theme-exit-confirm-button-font-weight: 700;
+  --theme-exit-confirm-button-font-size: 20px;
+  --theme-exit-confirm-button-radius: 10px;
+  --theme-exit-confirm-cancel-color: rgba(255, 255, 255, 1);
+  --theme-exit-confirm-cancel-bg: rgba(237, 27, 118, 0.08);
+  --theme-exit-confirm-cancel-border: 2px solid rgba(255, 34, 112, 1);
+  --theme-exit-confirm-confirm-color: rgba(41, 79, 96, 1);
+  --theme-exit-confirm-confirm-bg: rgba(255, 34, 112, 1);
+  --theme-exit-confirm-confirm-border: 2px solid rgba(255, 34, 112, 1);
 }

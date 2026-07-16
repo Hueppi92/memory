@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory - Game</title>
-  <script type="module" crossorigin src="../assets/game-6PU6d1IG.js"></script>
-  <link rel="modulepreload" crossorigin href="../assets/main-CDBAt2bu.js">
-  <link rel="modulepreload" crossorigin href="../assets/theme-catalog-B2anaPKk.js">
-  <link rel="stylesheet" crossorigin href="../assets/main-CSdxDb0o.css">
-  <link rel="stylesheet" crossorigin href="../assets/game-jBwWIswu.css">
+  <script type="module" crossorigin src="../assets/game-CkmJjx91.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/main-YAkRIlzi.js">
+  <link rel="modulepreload" crossorigin href="../assets/theme-catalog-D2f8K2Go.js">
+  <link rel="stylesheet" crossorigin href="../assets/main-127CVRmG.css">
+  <link rel="stylesheet" crossorigin href="../assets/game-CYab1x-X.css">
 </head>
 <body>
     <header id="gameHeader">
@@ -39,6 +39,17 @@
     <section id="field">
        
     </section>
+
+    <div id="exitConfirmOverlay" role="presentation" aria-hidden="true">
+        <div id="exitConfirmDialog" role="dialog" aria-modal="true" aria-labelledby="exitConfirmTitle" aria-describedby="exitConfirmMessage">
+            <h2 id="exitConfirmTitle">Leave game?</h2>
+            <p id="exitConfirmMessage">Your current game progress will be lost.</p>
+            <div id="exitConfirmActions">
+                <button id="exitConfirmCancel" class="exitConfirmButton exitConfirmButton--cancel" type="button">Back to game</button>
+                <button id="exitConfirmConfirm" class="exitConfirmButton exitConfirmButton--confirm" type="button">Exit game</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

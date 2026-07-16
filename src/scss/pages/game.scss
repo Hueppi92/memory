@@ -1,11 +1,14 @@
 @use '../components/card';
 @use '../components/header';
+@use '../components/exit-confirm';
 
 body {
-    --field-gap: 6px;
+    --field-gap: 9px;
     --card-width: 105px;
     --card-aspect-ratio: 105 / 110;
     --card-bg-size: 100%;
+    --card-front-bg-size: var(--card-bg-size);
+    --card-back-bg-size: var(--card-bg-size);
     --field-columns: 4;
     --theme-game-field-margin-top: 20px;
     min-height: 100vh;

@@ -10,7 +10,19 @@ function initDrawPage() {
 	const selectedTheme = selectedSettings.theme ?? DEFAULT_THEME_ID;
 
 	document.body.dataset.theme = selectedTheme;
+	setDrawBackLinkLabel(selectedTheme);
 	setDrawThemeIcon(selectedTheme);
+}
+
+function setDrawBackLinkLabel(themeId: string) {
+	const backLinkElement = document.getElementById('drawBackLink');
+
+	if (!backLinkElement) {
+		return;
+	}
+
+	const selectedTheme = THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
+	backLinkElement.textContent = selectedTheme?.backButtonLabel ?? 'Back to start';
 }
 
 function setDrawThemeIcon(themeId: string) {

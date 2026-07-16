@@ -49,8 +49,51 @@ body[data-winner-player='orange'] #winner {
 #winnerThemeIcon {
 	width: var(--theme-winner-icon-width, 120px);
 	height: var(--theme-winner-icon-height, 120px);
-	object-fit: contain;
 	display: block;
+	margin-top: var(--theme-winner-icon-margin-top, 56px);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	box-sizing: border-box;
+}
+
+body[data-winner-icon-mode='image'] #winnerThemeIcon {
+	background-image: var(--theme-winner-icon-image, none);
+}
+
+body[data-winner-icon-mode='mask'] #winnerThemeIcon {
+	background-image: none;
+	background-color: var(--theme-winner-icon-mask-bg, transparent);
+	border: var(--theme-winner-icon-mask-border, none);
+	border-radius: var(--theme-winner-icon-mask-radius, 0);
+	padding: var(--theme-winner-icon-mask-padding, 0);
+	position: relative;
+}
+
+body[data-winner-icon-mode='mask'] #winnerThemeIcon::before {
+	content: '';
+	position: absolute;
+	inset: var(--theme-winner-icon-mask-inner-inset, 0);
+	background-color: var(--theme-winner-icon-mask-color, currentColor);
+	filter: var(--theme-winner-icon-mask-outline, none);
+	-webkit-mask-image: var(--theme-winner-icon-mask-image, none);
+	mask-image: var(--theme-winner-icon-mask-image, none);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+body[data-winner-icon-mode='mask'][data-winner-player='blue'] #winnerThemeIcon::before {
+	background-color: var(--theme-winner-icon-mask-blue-color, var(--theme-winner-icon-mask-color, currentColor));
+	filter: var(--theme-winner-icon-mask-blue-outline, var(--theme-winner-icon-mask-outline, none));
+}
+
+body[data-winner-icon-mode='mask'][data-winner-player='orange'] #winnerThemeIcon::before {
+	background-color: var(--theme-winner-icon-mask-orange-color, var(--theme-winner-icon-mask-color, currentColor));
+	filter: var(--theme-winner-icon-mask-orange-outline, var(--theme-winner-icon-mask-outline, none));
 }
 
 #winnerBackLink {

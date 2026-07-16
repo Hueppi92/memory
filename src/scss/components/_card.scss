@@ -4,16 +4,23 @@
     height: auto;
     aspect-ratio: var(--card-aspect-ratio, 105 / 120);
     box-sizing: border-box;
+    position: relative;
     display: block;
+    appearance: none;
+    -webkit-appearance: none;
     background-color: transparent;
     border: none;
     margin: 0;
     padding: 0;
+    outline: none;
+    border-radius: var(--theme-card-radius, 10px);
+    overflow: hidden;
 
     &__inner {
         position: relative;
         width: 100%;
         height: 100%;
+        border-radius: inherit;
         transform-style: preserve-3d;
         transition: all 300ms ease-in-out;
         transform: rotateY(180deg);
@@ -24,21 +31,53 @@
         inset: 0;
         background-image: var(--card-face);
         background-position: center;
-        background-size: var(--card-bg-size, 100%);
+        background-size: var(--card-front-bg-size, var(--card-bg-size, 100%));
         background-repeat: no-repeat;
         backface-visibility: hidden;
+        border-radius: inherit;
 
         &--back {
             transform: rotateY(180deg);
             background-image: none;
             background-position: center;
-            background-size: var(--card-bg-size, 100%);
+            background-size: var(--card-back-bg-size, var(--card-front-bg-size, var(--card-bg-size, 100%)));
             background-repeat: no-repeat;
         }
     }
 
     &.is-flipped .card__inner {
         transform: rotateY(0deg);
+    }
+
+    &.is-flipped.is-matched {
+        border-radius: var(--theme-card-matched-radius, var(--theme-card-radius, 10px));
+        box-shadow: var(--theme-card-matched-shadow, none);
+        outline: var(--theme-card-matched-border, 2px solid rgba(77, 213, 188, 1));
+        outline-offset: calc(-1 * var(--theme-card-matched-inset, 0px));
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    &:active {
+        outline: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    &:focus-visible::before {
+        content: '';
+        position: absolute;
+        inset: var(--theme-card-focus-inset, 0);
+        border: var(--theme-card-focus-border, 2px solid rgba(255, 255, 255, 0.9));
+        border-radius: var(--theme-card-focus-radius, var(--theme-card-radius, 10px));
+        pointer-events: none;
+        z-index: 4;
     }
 }
 

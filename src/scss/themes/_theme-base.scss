@@ -95,6 +95,49 @@ body[data-theme='yourThemeId'] {
   --theme-exit-text-color: rgba(255, 255, 255, 1);
   --theme-exit-icon-mask: url('/assets/ui/exit.svg');
   --theme-exit-icon-color: rgba(255, 255, 255, 1);
+
+  /* Exit confirm popup */
+  --theme-exit-confirm-overlay-bg: rgba(0, 0, 0, 0.45);
+  --theme-exit-confirm-bg: rgba(255, 255, 255, 1);
+  --theme-exit-confirm-border: none;
+  --theme-exit-confirm-radius: 12px;
+  --theme-exit-confirm-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  --theme-exit-confirm-width: 480px;
+  --theme-exit-confirm-width-mobile: 420px;
+  --theme-exit-confirm-padding: 28px;
+  --theme-exit-confirm-padding-mobile: 22px;
+  --theme-exit-confirm-gap: 22px;
+  --theme-exit-confirm-gap-mobile: 16px;
+  --theme-exit-confirm-title-color: rgba(20, 20, 20, 1);
+  --theme-exit-confirm-title-font-family: var(--theme-font-family);
+  --theme-exit-confirm-title-font-weight: var(--theme-font-weight);
+  --theme-exit-confirm-title-font-size: 34px;
+  --theme-exit-confirm-title-line-height: 100%;
+  --theme-exit-confirm-title-letter-spacing: var(--theme-letter-spacing);
+  --theme-exit-confirm-title-transform: none;
+  --theme-exit-confirm-message-color: rgba(50, 50, 50, 1);
+  --theme-exit-confirm-message-font-family: var(--theme-font-family);
+  --theme-exit-confirm-message-font-weight: var(--theme-font-weight);
+  --theme-exit-confirm-message-font-size: 20px;
+  --theme-exit-confirm-message-line-height: 120%;
+  --theme-exit-confirm-message-letter-spacing: var(--theme-letter-spacing);
+  --theme-exit-confirm-actions-gap: 12px;
+  --theme-exit-confirm-button-min-height: 52px;
+  --theme-exit-confirm-button-padding: 12px 16px;
+  --theme-exit-confirm-button-radius: 10px;
+  --theme-exit-confirm-button-border: 1px solid rgba(0, 0, 0, 0.2);
+  --theme-exit-confirm-button-shadow: none;
+  --theme-exit-confirm-button-font-family: var(--theme-font-family);
+  --theme-exit-confirm-button-font-weight: var(--theme-font-weight);
+  --theme-exit-confirm-button-font-size: 18px;
+  --theme-exit-confirm-button-line-height: 100%;
+  --theme-exit-confirm-button-letter-spacing: var(--theme-letter-spacing);
+  --theme-exit-confirm-cancel-color: rgba(20, 20, 20, 1);
+  --theme-exit-confirm-cancel-bg: rgba(255, 255, 255, 1);
+  --theme-exit-confirm-cancel-border: var(--theme-exit-confirm-button-border);
+  --theme-exit-confirm-confirm-color: rgba(255, 255, 255, 1);
+  --theme-exit-confirm-confirm-bg: rgba(40, 40, 40, 1);
+  --theme-exit-confirm-confirm-border: none;
 }
 
 

@@ -1,0 +1,93 @@
+#exitConfirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--theme-exit-confirm-overlay-bg, rgba(0, 0, 0, 0.45));
+}
+
+#exitConfirmOverlay.is-open {
+  display: flex;
+}
+
+#exitConfirmDialog {
+  width: min(var(--theme-exit-confirm-width, 480px), 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--theme-exit-confirm-gap, 22px);
+  padding: var(--theme-exit-confirm-padding, 28px);
+  border-radius: var(--theme-exit-confirm-radius, 12px);
+  border: var(--theme-exit-confirm-border, none);
+  box-shadow: var(--theme-exit-confirm-shadow, 0 16px 40px rgba(0, 0, 0, 0.2));
+  background: var(--theme-exit-confirm-bg, rgba(255, 255, 255, 1));
+}
+
+#exitConfirmTitle {
+  margin: 0;
+  color: var(--theme-exit-confirm-title-color, rgba(20, 20, 20, 1));
+  font-family: var(--theme-exit-confirm-title-font-family, var(--theme-font-family));
+  font-weight: var(--theme-exit-confirm-title-font-weight, var(--theme-font-weight));
+  font-size: var(--theme-exit-confirm-title-font-size, 34px);
+  line-height: var(--theme-exit-confirm-title-line-height, 100%);
+  letter-spacing: var(--theme-exit-confirm-title-letter-spacing, var(--theme-letter-spacing));
+  text-transform: var(--theme-exit-confirm-title-transform, none);
+  text-align: center;
+}
+
+#exitConfirmMessage {
+  margin: 0;
+  color: var(--theme-exit-confirm-message-color, rgba(50, 50, 50, 1));
+  font-family: var(--theme-exit-confirm-message-font-family, var(--theme-font-family));
+  font-weight: var(--theme-exit-confirm-message-font-weight, var(--theme-font-weight));
+  font-size: var(--theme-exit-confirm-message-font-size, 20px);
+  line-height: var(--theme-exit-confirm-message-line-height, 120%);
+  letter-spacing: var(--theme-exit-confirm-message-letter-spacing, var(--theme-letter-spacing));
+  text-align: center;
+}
+
+#exitConfirmActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--theme-exit-confirm-actions-gap, 12px);
+}
+
+.exitConfirmButton {
+  min-height: var(--theme-exit-confirm-button-min-height, 52px);
+  padding: var(--theme-exit-confirm-button-padding, 12px 16px);
+  border-radius: var(--theme-exit-confirm-button-radius, 10px);
+  border: var(--theme-exit-confirm-button-border, 1px solid rgba(0, 0, 0, 0.2));
+  box-shadow: var(--theme-exit-confirm-button-shadow, none);
+  font-family: var(--theme-exit-confirm-button-font-family, var(--theme-font-family));
+  font-weight: var(--theme-exit-confirm-button-font-weight, var(--theme-font-weight));
+  font-size: var(--theme-exit-confirm-button-font-size, 18px);
+  line-height: var(--theme-exit-confirm-button-line-height, 100%);
+  letter-spacing: var(--theme-exit-confirm-button-letter-spacing, var(--theme-letter-spacing));
+  cursor: pointer;
+}
+
+.exitConfirmButton--cancel {
+  color: var(--theme-exit-confirm-cancel-color, rgba(20, 20, 20, 1));
+  background: var(--theme-exit-confirm-cancel-bg, rgba(255, 255, 255, 1));
+  border: var(--theme-exit-confirm-cancel-border, var(--theme-exit-confirm-button-border, 1px solid rgba(0, 0, 0, 0.2)));
+}
+
+.exitConfirmButton--confirm {
+  color: var(--theme-exit-confirm-confirm-color, rgba(255, 255, 255, 1));
+  background: var(--theme-exit-confirm-confirm-bg, rgba(40, 40, 40, 1));
+  border: var(--theme-exit-confirm-confirm-border, none);
+}
+
+@media (max-width: 640px) {
+  #exitConfirmDialog {
+    width: min(var(--theme-exit-confirm-width-mobile, 420px), 100%);
+    padding: var(--theme-exit-confirm-padding-mobile, 22px);
+    gap: var(--theme-exit-confirm-gap-mobile, 16px);
+  }
+
+  #exitConfirmActions {
+    grid-template-columns: 1fr;
+  }
+}

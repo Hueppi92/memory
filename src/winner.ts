@@ -23,8 +23,20 @@ function initWinnerPage() {
 	const winnerPlayer = result?.winner === 'orange' ? 'orange' : 'blue';
 
 	document.body.dataset.theme = selectedTheme;
+	setWinnerBackLinkLabel(selectedTheme);
 	window.winnerView = bindWinnerText();
 	window.winnerView.setWinner(winnerPlayer);
+}
+
+function setWinnerBackLinkLabel(themeId: string) {
+	const backLinkElement = document.getElementById('winnerBackLink');
+
+	if (!backLinkElement) {
+		return;
+	}
+
+	const selectedTheme = THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
+	backLinkElement.textContent = selectedTheme?.backButtonLabel ?? 'Back to start';
 }
 
 function bindWinnerText(): WinnerBinding {
@@ -52,7 +64,7 @@ function bindWinnerText(): WinnerBinding {
 }
 
 function setWinnerThemeIcon(themeId: string, player: string) {
-	const iconElement = document.getElementById('winnerThemeIcon') as HTMLImageElement | null;
+	const iconElement = document.getElementById('winnerThemeIcon') as HTMLElement | null;
 
 	if (!iconElement) {
 		return;
@@ -60,23 +72,39 @@ function setWinnerThemeIcon(themeId: string, player: string) {
 
 	const normalizedPlayer = player === 'orange' ? 'orange' : 'blue';
 	const theme = THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
+	const winnerThemeIconMask = normalizedPlayer === 'orange'
+		? theme?.winnerOrangeIconMaskUrl
+		: theme?.winnerBlueIconMaskUrl;
 
 	const winnerThemeIcon = normalizedPlayer === 'orange'
 		? theme?.winnerOrangeIconUrl
 		: theme?.winnerBlueIconUrl;
 
+	if (winnerThemeIconMask) {
+		document.body.dataset.winnerIconMode = 'mask';
+		document.body.style.setProperty('--theme-winner-icon-mask-image', `url('${winnerThemeIconMask}')`);
+		document.body.style.setProperty('--theme-winner-icon-image', 'none');
+		return;
+	}
+
 	if (winnerThemeIcon) {
-		iconElement.src = winnerThemeIcon;
+		document.body.dataset.winnerIconMode = 'image';
+		document.body.style.setProperty('--theme-winner-icon-image', `url('${winnerThemeIcon}')`);
+		document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
 		return;
 	}
 
 	if (theme?.winnerIconUrl) {
-		iconElement.src = theme.winnerIconUrl;
+		document.body.dataset.winnerIconMode = 'image';
+		document.body.style.setProperty('--theme-winner-icon-image', `url('${theme.winnerIconUrl}')`);
+		document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
 		return;
 	}
 
 	if (theme?.previewUrl) {
-		iconElement.src = theme.previewUrl;
+		document.body.dataset.winnerIconMode = 'image';
+		document.body.style.setProperty('--theme-winner-icon-image', `url('${theme.previewUrl}')`);
+		document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
 	}
 }
 

@@ -4,10 +4,13 @@ export type ThemeDefinition = {
 	previewUrl: string;
 	cardFaceUrls: string[];
 	cardBackUrl: string;
+	backButtonLabel?: string;
 	drawIconUrl?: string;
 	winnerIconUrl?: string;
 	winnerBlueIconUrl?: string;
 	winnerOrangeIconUrl?: string;
+	winnerBlueIconMaskUrl?: string;
+	winnerOrangeIconMaskUrl?: string;
 };
 
 function buildThemeAssetUrl(themeId: string, fileName: string) {
@@ -124,7 +127,10 @@ export const THEME_CATALOG: ThemeDefinition[] = [
 		previewUrl: '../assets/theme_preview/codeVibes.svg',
 		cardFaceUrls: collectFrontImageUrls('codeVibes', codeVibesFiles),
 		cardBackUrl: buildThemeAssetUrl('codeVibes', 'back.svg'),
+		backButtonLabel: 'Back to start',
 		drawIconUrl: buildThemeAssetUrl('codeVibes', 'draw.svg'),
+		winnerBlueIconMaskUrl: buildThemeAssetUrl('codeVibes', 'winner_mask.svg'),
+		winnerOrangeIconMaskUrl: buildThemeAssetUrl('codeVibes', 'winner_mask.svg'),
 	},
 	{
 		id: 'gaming',
@@ -132,6 +138,7 @@ export const THEME_CATALOG: ThemeDefinition[] = [
 		previewUrl: '../assets/theme_preview/gaming.svg',
 		cardFaceUrls: collectFrontImageUrls('gaming', gamingFiles),
 		cardBackUrl: buildThemeAssetUrl('gaming', 'back.svg'),
+		backButtonLabel: 'Home',
 		drawIconUrl: buildThemeAssetUrl('gaming', 'draw.svg'),
 		winnerIconUrl: buildThemeAssetUrl('gaming', 'trophy.svg'),
 	},
@@ -141,7 +148,10 @@ export const THEME_CATALOG: ThemeDefinition[] = [
 		previewUrl: '../assets/theme_preview/daProjects.svg',
 		cardFaceUrls: collectFrontImageUrls('daProjects', daProjectsFiles),
 		cardBackUrl: buildThemeAssetUrl('daProjects', 'back.svg'),
+		backButtonLabel: 'Home',
 		drawIconUrl: buildThemeAssetUrl('daProjects', 'draw.svg'),
+		winnerBlueIconUrl: buildThemeAssetUrl('daProjects', 'winner_blue.svg'),
+		winnerOrangeIconUrl: buildThemeAssetUrl('daProjects', 'winner_orange.svg'),
 	},
 	{
 		id: 'foods',
@@ -149,6 +159,7 @@ export const THEME_CATALOG: ThemeDefinition[] = [
 		previewUrl: '../assets/theme_preview/foods.svg',
 		cardFaceUrls: collectFrontImageUrls('foods', foodsFiles),
 		cardBackUrl: buildThemeAssetUrl('foods', 'back.svg'),
+		backButtonLabel: 'Home',
 		drawIconUrl: buildThemeAssetUrl('foods', 'draw.svg'),
 		winnerBlueIconUrl: buildThemeAssetUrl('foods', 'blue_winner.svg'),
 		winnerOrangeIconUrl: buildThemeAssetUrl('foods', 'orange_winner.svg'),
