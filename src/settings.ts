@@ -27,6 +27,24 @@ const gameBarLabels = {
 	},
 } as const;
 
+type ThemePreviewContext = {
+	previewImage: HTMLImageElement;
+	defaultPreviewSource: string;
+	themeInputs: NodeListOf<HTMLInputElement>;
+};
+
+type GameBarPreviewContext = {
+	gameTheme: HTMLElement;
+	player: HTMLElement;
+	boardSize: HTMLElement;
+	startButton: HTMLAnchorElement;
+};
+
+type PreviewGroup = {
+	name: 'theme' | 'player' | 'boardSize';
+	key: 'theme' | 'player' | 'boardSize';
+};
+
 initSettingsPage();
 
 function initSettingsPage() {
@@ -93,115 +111,173 @@ function getBoardSizeLabel(boardSize: number) {
 }
 
 function initThemePreview() {
-	const previewImage = document.getElementById('themePreviewImage') as HTMLImageElement | null;
-	const themeInputs = document.querySelectorAll<HTMLInputElement>('input[name="theme"]');
-
-	if (!previewImage || themeInputs.length === 0) {
+	const context = getThemePreviewContext();
+	if (!context) {
 		return;
 	}
 
-	const defaultPreviewSource = THEME_BY_ID[DEFAULT_THEME_ID]?.previewUrl ?? previewImage.src;
-	const getSelectedTheme = () => getSelectedValue('theme');
-
-	const updatePreview = (theme?: string) => {
-		if (!theme) {
-			previewImage.src = defaultPreviewSource;
-			return;
-		}
-
-		const nextPreviewSource = THEME_BY_ID[theme]?.previewUrl;
-
-		if (nextPreviewSource) {
-			previewImage.src = nextPreviewSource;
-		}
-	};
-
-	updatePreview(getSelectedTheme());
-
-	themeInputs.forEach((input) => {
-		const label = input.closest('label');
-
-		label?.addEventListener('mouseenter', () => updatePreview(input.value));
-		label?.addEventListener('mouseleave', () => updatePreview(getSelectedTheme()));
-		label?.addEventListener('focusin', () => updatePreview(input.value));
-		label?.addEventListener('focusout', () => updatePreview(getSelectedTheme()));
-
-		input.addEventListener('focus', () => updatePreview(input.value));
-		input.addEventListener('change', () => updatePreview(input.value));
-		input.addEventListener('blur', () => updatePreview(getSelectedTheme()));
-	});
+	updateThemePreview(context, getSelectedValue('theme'));
+	bindThemePreviewEvents(context);
 }
 
 function initGameBarPreview() {
-	const gameTheme = document.getElementById('game_theme');
-	const player = document.getElementById('player');
-	const boardSize = document.getElementById('board_size');
-
-	if (!gameTheme || !player || !boardSize) {
+	const context = getGameBarPreviewContext();
+	if (!context) {
 		return;
 	}
 
-	const selectedSettings = () => ({
+	bindStartButtonGuard(context.startButton);
+	updateGameBarPreview(context, getSelectedSettings());
+	syncStartButtonState(context);
+	bindGameBarPreviewGroups(context);
+}
+
+function getThemePreviewContext(): ThemePreviewContext | null {
+	const previewImage = document.getElementById('themePreviewImage') as HTMLImageElement | null;
+	const themeInputs = document.querySelectorAll<HTMLInputElement>('input[name="theme"]');
+	if (!previewImage || themeInputs.length === 0) {
+		return null;
+	}
+
+	const defaultPreviewSource = THEME_BY_ID[DEFAULT_THEME_ID]?.previewUrl ?? previewImage.src;
+	return { previewImage, defaultPreviewSource, themeInputs };
+}
+
+function updateThemePreview(context: ThemePreviewContext, theme?: string) {
+	if (!theme) {
+		context.previewImage.src = context.defaultPreviewSource;
+		return;
+	}
+
+	const nextPreviewSource = THEME_BY_ID[theme]?.previewUrl;
+	if (nextPreviewSource) {
+		context.previewImage.src = nextPreviewSource;
+	}
+}
+
+function bindThemePreviewEvents(context: ThemePreviewContext) {
+	context.themeInputs.forEach((input) => {
+		bindThemePreviewLabelEvents(input.closest('label'), context, input.value);
+		bindThemePreviewInputEvents(input, context);
+	});
+}
+
+function bindThemePreviewLabelEvents(label: HTMLLabelElement | null, context: ThemePreviewContext, inputValue: string) {
+	const resetPreview = () => updateThemePreview(context, getSelectedValue('theme'));
+	label?.addEventListener('mouseenter', () => updateThemePreview(context, inputValue));
+	label?.addEventListener('mouseleave', resetPreview);
+	label?.addEventListener('focusin', () => updateThemePreview(context, inputValue));
+	label?.addEventListener('focusout', resetPreview);
+}
+
+function bindThemePreviewInputEvents(input: HTMLInputElement, context: ThemePreviewContext) {
+	const resetPreview = () => updateThemePreview(context, getSelectedValue('theme'));
+	input.addEventListener('focus', () => updateThemePreview(context, input.value));
+	input.addEventListener('change', () => updateThemePreview(context, input.value));
+	input.addEventListener('blur', resetPreview);
+}
+
+function getGameBarPreviewContext(): GameBarPreviewContext | null {
+	const gameTheme = document.getElementById('game_theme');
+	const player = document.getElementById('player');
+	const boardSize = document.getElementById('board_size');
+	const startButton = document.getElementById('startButton') as HTMLAnchorElement | null;
+	if (!gameTheme || !player || !boardSize || !startButton) {
+		return null;
+	}
+
+	return { gameTheme, player, boardSize, startButton };
+}
+
+function getSelectedSettings(): GameSettings {
+	const selectedBoardSize = getSelectedValue('boardSize');
+	return {
 		theme: getSelectedValue('theme'),
 		player: getSelectedValue('player'),
-		boardSize: getSelectedValue('boardSize') ? Number(getSelectedValue('boardSize')) : undefined,
-	}) as GameSettings;
-
-	const updateGameBar = (settings: GameSettings) => {
-		gameTheme.textContent = settings.theme ? getThemeLabel(settings.theme) : gameBarPlaceholders.theme;
-		player.textContent = settings.player ? getPlayerLabel(settings.player) : gameBarPlaceholders.player;
-		boardSize.textContent = settings.boardSize ? getBoardSizeLabel(settings.boardSize) : gameBarPlaceholders.boardSize;
+		boardSize: selectedBoardSize ? Number(selectedBoardSize) : undefined,
 	};
+}
 
-	updateGameBar(selectedSettings());
+function updateGameBarPreview(context: GameBarPreviewContext, settings: GameSettings) {
+	context.gameTheme.textContent = settings.theme ? getThemeLabel(settings.theme) : gameBarPlaceholders.theme;
+	context.player.textContent = settings.player ? getPlayerLabel(settings.player) : gameBarPlaceholders.player;
+	context.boardSize.textContent = settings.boardSize ? getBoardSizeLabel(settings.boardSize) : gameBarPlaceholders.boardSize;
+}
 
-	const groups = [
+function bindGameBarPreviewGroups(context: GameBarPreviewContext) {
+	const groups: PreviewGroup[] = [
 		{ name: 'theme', key: 'theme' },
 		{ name: 'player', key: 'player' },
 		{ name: 'boardSize', key: 'boardSize' },
-	] as const;
+	];
 
-	groups.forEach(({ name, key }) => {
-		const inputs = document.querySelectorAll<HTMLInputElement>(`input[name="${name}"]`);
+	groups.forEach((group) => bindGameBarGroup(context, group));
+}
 
-		inputs.forEach((input) => {
-			const label = input.closest('label');
+function bindGameBarGroup(context: GameBarPreviewContext, group: PreviewGroup) {
+	const inputs = document.querySelectorAll<HTMLInputElement>(`input[name="${group.name}"]`);
+	inputs.forEach((input) => bindGameBarInputEvents(context, group.key, input));
+}
 
-			const previewSelection = () => {
-				const currentSettings = selectedSettings();
-				const previewSettings: GameSettings = {
-					theme: currentSettings.theme,
-					player: currentSettings.player,
-					boardSize: currentSettings.boardSize,
-				};
+function bindGameBarInputEvents(context: GameBarPreviewContext, key: PreviewGroup['key'], input: HTMLInputElement) {
+	bindGameBarLabelEvents(context, key, input, input.closest('label'));
+	bindGameBarControlEvents(context, key, input);
+}
 
-				if (key === 'theme') {
-					previewSettings.theme = input.value;
-				}
+function bindGameBarLabelEvents(context: GameBarPreviewContext, key: PreviewGroup['key'], input: HTMLInputElement, label: HTMLLabelElement | null) {
+	const previewSelection = () => updateGameBarPreview(context, createPreviewSettings(key, input.value));
+	const resetSelection = () => updateGameBarPreview(context, getSelectedSettings());
+	label?.addEventListener('mouseenter', previewSelection);
+	label?.addEventListener('mouseleave', resetSelection);
+	label?.addEventListener('focusin', previewSelection);
+	label?.addEventListener('focusout', resetSelection);
+}
 
-				if (key === 'player') {
-					previewSettings.player = input.value;
-				}
+function bindGameBarControlEvents(context: GameBarPreviewContext, key: PreviewGroup['key'], input: HTMLInputElement) {
+	const previewSelection = () => updateGameBarPreview(context, createPreviewSettings(key, input.value));
+	input.addEventListener('focus', previewSelection);
+	input.addEventListener('change', () => applyGameBarSelection(context));
+	input.addEventListener('blur', () => updateGameBarPreview(context, getSelectedSettings()));
+}
 
-				if (key === 'boardSize') {
-					previewSettings.boardSize = Number(input.value);
-				}
+function createPreviewSettings(key: PreviewGroup['key'], value: string): GameSettings {
+	const previewSettings = getSelectedSettings();
+	if (key === 'theme') {
+		return { ...previewSettings, theme: value };
+	}
 
-				updateGameBar(previewSettings);
-			};
+	if (key === 'player') {
+		return { ...previewSettings, player: value };
+	}
 
-			label?.addEventListener('mouseenter', previewSelection);
-			label?.addEventListener('mouseleave', () => updateGameBar(selectedSettings()));
-			label?.addEventListener('focusin', previewSelection);
-			label?.addEventListener('focusout', () => updateGameBar(selectedSettings()));
+	return { ...previewSettings, boardSize: Number(value) };
+}
 
-			input.addEventListener('focus', previewSelection);
-			input.addEventListener('change', () => {
-				const currentSelection = selectedSettings();
-				saveGameSettings(currentSelection);
-				updateGameBar(currentSelection);
-			});
-			input.addEventListener('blur', () => updateGameBar(selectedSettings()));
-		});
+function applyGameBarSelection(context: GameBarPreviewContext) {
+	const currentSelection = getSelectedSettings();
+	saveGameSettings(currentSelection);
+	updateGameBarPreview(context, currentSelection);
+	syncStartButtonState(context);
+}
+
+function bindStartButtonGuard(startButton: HTMLAnchorElement) {
+	startButton.addEventListener('click', (event) => {
+		if (startButton.getAttribute('aria-disabled') === 'true') {
+			event.preventDefault();
+		}
 	});
+}
+
+function syncStartButtonState(context: GameBarPreviewContext) {
+	const hasCompleteSettings = areRequiredSettingsSelected(getSelectedSettings());
+	setStartButtonDisabledState(context.startButton, !hasCompleteSettings);
+}
+
+function areRequiredSettingsSelected(settings: GameSettings) {
+	return Boolean(settings.theme && settings.player && settings.boardSize);
+}
+
+function setStartButtonDisabledState(startButton: HTMLAnchorElement, isDisabled: boolean) {
+	startButton.setAttribute('aria-disabled', String(isDisabled));
+	startButton.tabIndex = isDisabled ? -1 : 0;
 }

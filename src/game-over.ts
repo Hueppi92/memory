@@ -28,42 +28,54 @@ function initGameOverPage() {
 
 	document.body.dataset.theme = selectedTheme;
 	window.gameOverScoreboard = bindScoreboard();
+	applyResultToScoreboard(gameResult);
+	scheduleResultRedirect(gameResult);
+}
 
-	if (gameResult) {
-		window.gameOverScoreboard.setScores(gameResult.scores);
-
-		window.setTimeout(() => {
-			if (gameResult.winner === 'draw') {
-				window.location.href = '/pages/draw.html';
-				return;
-			}
-
-			window.location.href = '/pages/winner.html';
-		}, 10000);
+function applyResultToScoreboard(gameResult: ReturnType<typeof loadGameResult>) {
+	if (!gameResult) {
+		return;
 	}
+
+	window.gameOverScoreboard?.setScores(gameResult.scores);
+}
+
+function scheduleResultRedirect(gameResult: ReturnType<typeof loadGameResult>) {
+	if (!gameResult) {
+		return;
+	}
+
+	window.setTimeout(() => {
+		navigateFromResult(gameResult.winner);
+	}, 5000);
+}
+
+
+function navigateFromResult(winner: 'blue' | 'orange' | 'draw') {
+	if (winner === 'draw') {
+		window.location.href = '/pages/draw.html';
+		return;
+	}
+
+	window.location.href = '/pages/winner.html';
 }
 
 function bindScoreboard(): ScoreboardBinding {
 	const blueScoreElement = document.getElementById('blueScoreValue');
 	const orangeScoreElement = document.getElementById('orangeScoreValue');
-
 	const getScores = (): PlayerScore => ({
 		blue: Number(blueScoreElement?.textContent ?? 0),
 		orange: Number(orangeScoreElement?.textContent ?? 0),
 	});
-
 	const setScores = (nextScores: Partial<PlayerScore>) => {
-		if (typeof nextScores.blue === 'number' && blueScoreElement) {
-			blueScoreElement.textContent = String(nextScores.blue);
-		}
-
-		if (typeof nextScores.orange === 'number' && orangeScoreElement) {
-			orangeScoreElement.textContent = String(nextScores.orange);
-		}
+		setScoreValue(blueScoreElement, nextScores.blue);
+		setScoreValue(orangeScoreElement, nextScores.orange);
 	};
+	return { setScores, getScores };
+}
 
-	return {
-		setScores,
-		getScores,
-	};
+function setScoreValue(element: HTMLElement | null, score?: number) {
+	if (typeof score === 'number' && element) {
+		element.textContent = String(score);
+	}
 }

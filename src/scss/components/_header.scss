@@ -149,11 +149,11 @@
       }
 
       &--blue {
-        background-image: var(--scoreboard-label-blue);
+        background-image: var(--theme-scoreboard-label-blue);
       }
 
       &--orange {
-        background-image: var(--scoreboard-label-orange);
+        background-image: var(--theme-scoreboard-label-orange);
       }
     }
   }

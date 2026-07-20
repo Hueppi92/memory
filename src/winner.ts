@@ -42,70 +42,63 @@ function setWinnerBackLinkLabel(themeId: string) {
 function bindWinnerText(): WinnerBinding {
 	const winnerElement = document.getElementById('winner');
 	const selectedTheme = document.body.dataset.theme ?? DEFAULT_THEME_ID;
-
-	const setWinner = (player: string) => {
-		if (!winnerElement) {
-			return;
-		}
-
-		const normalizedPlayer = player === 'orange' ? 'orange' : 'blue';
-		document.body.dataset.winnerPlayer = normalizedPlayer;
-
-		winnerElement.textContent = normalizeWinnerLabel(player);
-		setWinnerThemeIcon(selectedTheme, player);
-	};
-
-	const getWinner = () => winnerElement?.textContent ?? '';
-
 	return {
-		setWinner,
-		getWinner,
+		setWinner: (player: string) => applyWinnerSelection(winnerElement, selectedTheme, player),
+		getWinner: () => winnerElement?.textContent ?? '',
 	};
 }
 
 function setWinnerThemeIcon(themeId: string, player: string) {
 	const iconElement = document.getElementById('winnerThemeIcon') as HTMLElement | null;
-
 	if (!iconElement) {
 		return;
 	}
-
-	const normalizedPlayer = player === 'orange' ? 'orange' : 'blue';
 	const theme = THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
-	const winnerThemeIconMask = normalizedPlayer === 'orange'
-		? theme?.winnerOrangeIconMaskUrl
-		: theme?.winnerBlueIconMaskUrl;
+	const normalizedPlayer = normalizePlayerId(player);
+	const sources = getWinnerIconSources(theme, normalizedPlayer);
+	if (sources.maskUrl) {
+		applyMaskIcon(sources.maskUrl);
+		return;
+	}
+	applyImageIcon(sources.imageUrl);
+}
 
-	const winnerThemeIcon = normalizedPlayer === 'orange'
-		? theme?.winnerOrangeIconUrl
-		: theme?.winnerBlueIconUrl;
-
-	if (winnerThemeIconMask) {
-		document.body.dataset.winnerIconMode = 'mask';
-		document.body.style.setProperty('--theme-winner-icon-mask-image', `url('${winnerThemeIconMask}')`);
-		document.body.style.setProperty('--theme-winner-icon-image', 'none');
+function applyWinnerSelection(winnerElement: HTMLElement | null, themeId: string, player: string) {
+	if (!winnerElement) {
 		return;
 	}
 
-	if (winnerThemeIcon) {
-		document.body.dataset.winnerIconMode = 'image';
-		document.body.style.setProperty('--theme-winner-icon-image', `url('${winnerThemeIcon}')`);
-		document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
+	const normalizedPlayer = normalizePlayerId(player);
+	document.body.dataset.winnerPlayer = normalizedPlayer;
+	winnerElement.textContent = normalizeWinnerLabel(normalizedPlayer);
+	setWinnerThemeIcon(themeId, normalizedPlayer);
+}
+
+function normalizePlayerId(player: string): 'orange' | 'blue' {
+	return player === 'orange' ? 'orange' : 'blue';
+}
+
+function getWinnerIconSources(theme: (typeof THEME_BY_ID)[string] | undefined, player: 'orange' | 'blue') {
+	const maskUrl = player === 'orange' ? theme?.winnerOrangeIconMaskUrl : theme?.winnerBlueIconMaskUrl;
+	const imageUrl = player === 'orange' ? theme?.winnerOrangeIconUrl : theme?.winnerBlueIconUrl;
+	const fallback = theme?.winnerIconUrl ?? theme?.previewUrl;
+	return { maskUrl, imageUrl: imageUrl ?? fallback };
+}
+
+function applyMaskIcon(maskUrl: string) {
+	document.body.dataset.winnerIconMode = 'mask';
+	document.body.style.setProperty('--theme-winner-icon-mask-image', `url('${maskUrl}')`);
+	document.body.style.setProperty('--theme-winner-icon-image', 'none');
+}
+
+function applyImageIcon(imageUrl?: string) {
+	if (!imageUrl) {
 		return;
 	}
 
-	if (theme?.winnerIconUrl) {
-		document.body.dataset.winnerIconMode = 'image';
-		document.body.style.setProperty('--theme-winner-icon-image', `url('${theme.winnerIconUrl}')`);
-		document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
-		return;
-	}
-
-	if (theme?.previewUrl) {
-		document.body.dataset.winnerIconMode = 'image';
-		document.body.style.setProperty('--theme-winner-icon-image', `url('${theme.previewUrl}')`);
-		document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
-	}
+	document.body.dataset.winnerIconMode = 'image';
+	document.body.style.setProperty('--theme-winner-icon-image', `url('${imageUrl}')`);
+	document.body.style.setProperty('--theme-winner-icon-mask-image', 'none');
 }
 
 function normalizeWinnerLabel(player: string) {

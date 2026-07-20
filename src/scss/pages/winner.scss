@@ -14,6 +14,22 @@ body {
 	align-items: center;
 	gap: var(--theme-winner-content-gap, 20px);
 	text-align: center;
+	opacity: 0;
+	transform: translateY(-100vh);
+	animation: winner-slide-in-from-top var(--theme-winner-enter-duration, 700ms)
+		var(--theme-winner-enter-easing, cubic-bezier(0.2, 0.8, 0.2, 1)) forwards;
+}
+
+@keyframes winner-slide-in-from-top {
+	from {
+		opacity: 0;
+		transform: translateY(-100vh);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 #winnerMessage {

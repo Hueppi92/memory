@@ -27,20 +27,18 @@ function setDrawBackLinkLabel(themeId: string) {
 
 function setDrawThemeIcon(themeId: string) {
 	const iconElement = document.getElementById('drawThemeIcon') as HTMLImageElement | null;
+ 	const selectedTheme = getThemeById(themeId);
 
 	if (!iconElement) {
 		return;
 	}
 
-	const selectedTheme = THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
-	const drawIconUrl = selectedTheme?.drawIconUrl;
-
-	if (drawIconUrl) {
-		iconElement.src = drawIconUrl;
-		return;
+	const iconUrl = selectedTheme?.drawIconUrl ?? selectedTheme?.previewUrl;
+	if (iconUrl) {
+		iconElement.src = iconUrl;
 	}
+}
 
-	if (selectedTheme?.previewUrl) {
-		iconElement.src = selectedTheme.previewUrl;
-	}
+function getThemeById(themeId: string) {
+	return THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
 }

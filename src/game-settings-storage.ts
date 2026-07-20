@@ -38,22 +38,16 @@ function normalizeTheme(theme?: string) {
 }
 
 export function loadGameSettings(): GameSettings {
-	try {
-		const rawValue = localStorage.getItem(STORAGE_KEY);
-
-		if (!rawValue) {
-			return {};
-		}
-
-		const parsed = JSON.parse(rawValue) as GameSettings;
-		return {
-			theme: normalizeTheme(parsed.theme),
-			player: parsed.player,
-			boardSize: parsed.boardSize,
-		};
-	} catch {
+	const parsed = readJsonFromStorage<GameSettings>(STORAGE_KEY);
+	if (!parsed) {
 		return {};
 	}
+
+	return {
+		theme: normalizeTheme(parsed.theme),
+		player: parsed.player,
+		boardSize: parsed.boardSize,
+	};
 }
 
 export function saveGameSettings(settings: GameSettings) {
@@ -65,23 +59,12 @@ export function saveGameSettings(settings: GameSettings) {
 }
 
 export function loadGameResult(): GameResult | null {
-	try {
-		const rawValue = localStorage.getItem(RESULT_STORAGE_KEY);
-
-		if (!rawValue) {
-			return null;
-		}
-
-		const parsed = JSON.parse(rawValue) as GameResult;
-
-		if (!parsed?.scores) {
-			return null;
-		}
-
-		return parsed;
-	} catch {
+	const parsed = readJsonFromStorage<GameResult>(RESULT_STORAGE_KEY);
+	if (!parsed?.scores) {
 		return null;
 	}
+
+	return parsed;
 }
 
 export function saveGameResult(result: GameResult) {
@@ -89,5 +72,18 @@ export function saveGameResult(result: GameResult) {
 		localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(result));
 	} catch {
 		// Ignore storage errors (private mode, quota, etc.).
+	}
+}
+
+function readJsonFromStorage<T>(key: string): T | null {
+	try {
+		const rawValue = localStorage.getItem(key);
+		if (!rawValue) {
+			return null;
+		}
+
+		return JSON.parse(rawValue) as T;
+	} catch {
+		return null;
 	}
 }

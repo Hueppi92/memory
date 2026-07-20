@@ -44,28 +44,44 @@ export class Turn {
   }
 
   flipCard(cardId: number) {
-    if (this.isResolving) {
+    if (!this.canFlipCard(cardId)) {
       return;
+    }
+    const cardElement = this.getCardElement(cardId);
+    if (!cardElement) {
+      return;
+    }
+    cardElement.classList.add('is-flipped');
+    if (!this.tryAddFlippedCard(cardElement, cardId)) {
+      return;
+    }
+    this.resolvePairWhenReady();
+  }
+
+  private canFlipCard(cardId: number) {
+    if (this.isResolving) {
+      return false;
     }
 
     const cardElement = this.getCardElement(cardId);
     if (!cardElement || cardElement.classList.contains('is-matched')) {
-      return;
+      return false;
     }
 
-    if (this.flippedCards.some((card) => card.id === cardId)) {
-      return;
-    }
+    return !this.flippedCards.some((card) => card.id === cardId);
+  }
 
-    cardElement.classList.add('is-flipped');
-
+  private tryAddFlippedCard(cardElement: HTMLButtonElement, cardId: number) {
     const faceUrl = this.getFaceUrlFromCard(cardElement);
     if (!faceUrl) {
-      return;
+      return false;
     }
 
     this.flippedCards.push({ id: cardId, faceUrl });
+    return true;
+  }
 
+  private resolvePairWhenReady() {
     if (this.flippedCards.length === 2) {
       this.resolveCurrentPair();
     }
@@ -94,25 +110,44 @@ export class Turn {
     }
 
     if (firstCard.faceUrl === secondCard.faceUrl) {
-      this.foundPair = true;
-      this.foundPairs.push([firstCard, secondCard]);
-      this.increasePlayerScore();
-      this.getCardElement(firstCard.id)?.classList.add('is-matched');
-      this.getCardElement(secondCard.id)?.classList.add('is-matched');
-      this.flippedCards = [];
+      this.resolveMatchingPair(firstCard, secondCard);
       return;
     }
 
+    this.resolveMismatchedPair(firstCard, secondCard);
+  }
+
+  private resolveMatchingPair(firstCard: ComparedCard, secondCard: ComparedCard) {
+    this.foundPair = true;
+    this.foundPairs.push([firstCard, secondCard]);
+    this.increasePlayerScore();
+    this.getCardElement(firstCard.id)?.classList.add('is-matched');
+    this.getCardElement(secondCard.id)?.classList.add('is-matched');
+    this.resetFlippedCards();
+  }
+
+  private resolveMismatchedPair(firstCard: ComparedCard, secondCard: ComparedCard) {
     this.foundPair = false;
     this.isResolving = true;
-
     window.setTimeout(() => {
-      this.getCardElement(firstCard.id)?.classList.remove('is-flipped');
-      this.getCardElement(secondCard.id)?.classList.remove('is-flipped');
-      this.flippedCards = [];
-      this.isResolving = false;
-      this.nextTurn();
+      this.unflipCards(firstCard.id, secondCard.id);
+      this.resetAfterMismatch();
     }, 900);
+  }
+
+  private unflipCards(firstCardId: number, secondCardId: number) {
+    this.getCardElement(firstCardId)?.classList.remove('is-flipped');
+    this.getCardElement(secondCardId)?.classList.remove('is-flipped');
+  }
+
+  private resetAfterMismatch() {
+    this.resetFlippedCards();
+    this.isResolving = false;
+    this.nextTurn();
+  }
+
+  private resetFlippedCards() {
+    this.flippedCards = [];
   }
 
   private getCardElement(cardId: number): HTMLButtonElement | null {
@@ -126,7 +161,11 @@ export class Turn {
     }
 
     const cardFaceElement = card.querySelector('.card__face') as HTMLElement | null;
-    const inlineStyle = cardFaceElement?.getAttribute('style');
+    const inlineStyle = cardFaceElement?.getAttribute('style') ?? null;
+    return this.extractUrlFromInlineStyle(inlineStyle);
+  }
+
+  private extractUrlFromInlineStyle(inlineStyle: string | null) {
     if (!inlineStyle) {
       return null;
     }

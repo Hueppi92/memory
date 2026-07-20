@@ -153,6 +153,12 @@ ul {
 
     & #startButton {
       @include buttons.startActionButton;
+
+      &[aria-disabled="true"] {
+        opacity: 0.45;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
     }
   }
 }
