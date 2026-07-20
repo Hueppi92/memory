@@ -14,6 +14,22 @@ body {
 	align-items: center;
 	gap: var(--theme-draw-content-gap, 14px);
 	text-align: center;
+	opacity: 0;
+	transform: translateY(-100vh);
+	animation: draw-slide-in-from-top var(--theme-draw-enter-duration, var(--theme-winner-enter-duration, 700ms))
+		var(--theme-draw-enter-easing, var(--theme-winner-enter-easing, cubic-bezier(0.2, 0.8, 0.2, 1))) forwards;
+}
+
+@keyframes draw-slide-in-from-top {
+	from {
+		opacity: 0;
+		transform: translateY(-100vh);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 #drawMessage {
