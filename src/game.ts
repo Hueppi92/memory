@@ -76,7 +76,9 @@ function maybeEndGame(context: GamePageContext) {
     }
     context.isRedirecting = true;
     saveGameResult(buildGameResult());
-    window.location.href = '/pages/game-over.html';
+    window.setTimeout(() => {
+        window.location.href = '/pages/game-over.html';
+    }, 2000);
 }
 
 function buildGameResult(): GameResult {

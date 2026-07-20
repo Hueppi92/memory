@@ -54,7 +54,7 @@ export function saveGameSettings(settings: GameSettings) {
 	try {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
 	} catch {
-		// Ignore storage errors (private mode, quota, etc.).
+		console.log('Failed to save game settings to localStorage. This may happen in private mode or if storage quota is exceeded.');
 	}
 }
 
@@ -71,7 +71,7 @@ export function saveGameResult(result: GameResult) {
 	try {
 		localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify(result));
 	} catch {
-		// Ignore storage errors (private mode, quota, etc.).
+		console.log('Failed to save game result to localStorage. This may happen in private mode or if storage quota is exceeded.');
 	}
 }
 
