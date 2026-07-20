@@ -1,3 +1,6 @@
+/**
+ * Describes all assets and labels that belong to a theme.
+ */
 export type ThemeDefinition = {
 	id: string;
 	label: string;
@@ -13,11 +16,24 @@ export type ThemeDefinition = {
 	winnerOrangeIconMaskUrl?: string;
 };
 
+/**
+ * Builds a relative asset URL for a file inside a theme directory.
+ *
+ * @param themeId - The theme's directory name
+ * @param fileName - The asset file name within that directory
+ * @returns The relative URL to the asset
+ */
 function buildThemeAssetUrl(themeId: string, fileName: string) {
 	return `../assets/theme_files/${themeId}/${fileName}`;
 }
 
-// General helper: collect all card front images (front_*) from a theme file list.
+/**
+ * Collects every card-front image from a theme asset list.
+ *
+ * @param themeId - The theme's directory name
+ * @param fileNames - All asset file names for the theme
+ * @returns URLs for the files whose name starts with `front_`
+ */
 function collectFrontImageUrls(themeId: string, fileNames: string[]) {
 	return fileNames
 		.filter((fileName) => fileName.startsWith('front_'))
@@ -120,6 +136,9 @@ const foodsFiles = [
 	'label_orange.svg',
 ];
 
+/**
+ * The complete set of available game themes.
+ */
 export const THEME_CATALOG: ThemeDefinition[] = [
 	{
 		id: 'codeVibes',
@@ -166,9 +185,15 @@ export const THEME_CATALOG: ThemeDefinition[] = [
 	},
 ];
 
+/**
+ * Theme lookup table keyed by theme id.
+ */
 export const THEME_BY_ID = THEME_CATALOG.reduce<Record<string, ThemeDefinition>>((result, theme) => {
 	result[theme.id] = theme;
 	return result;
 }, {});
 
+/**
+ * The fallback theme used when no selection is available.
+ */
 export const DEFAULT_THEME_ID = THEME_BY_ID.codeVibes?.id ?? THEME_CATALOG[0]?.id ?? '';

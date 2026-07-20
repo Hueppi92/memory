@@ -15,6 +15,9 @@ type GamePageContext = {
 
 initGamePage();
 
+/**
+ * Bootstraps the game board, turn state, and exit dialog.
+ */
 function initGamePage() {
     const selectedSettings = loadGameSettings();
     const fieldRef = document.getElementById('field');
@@ -29,6 +32,13 @@ function initGamePage() {
     bindCardClick(context);
 }
 
+/**
+ * Normalizes the saved settings into a runtime game context.
+ *
+ * @param settings - The saved game settings
+ * @param fieldRef - The board's field element
+ * @returns The runtime context used to drive the game page
+ */
 function createGamePageContext(settings: GameSettings, fieldRef: HTMLElement): GamePageContext {
     return {
         fieldRef,
@@ -39,17 +49,33 @@ function createGamePageContext(settings: GameSettings, fieldRef: HTMLElement): G
     };
 }
 
+/**
+ * Applies the selected settings to document metadata.
+ *
+ * @param context - The current game page context
+ * @param settings - The saved game settings
+ */
 function applyGameDataset(context: GamePageContext, settings: GameSettings) {
     document.body.dataset.theme = context.selectedTheme;
     document.body.dataset.player = context.selectedPlayer;
     document.body.dataset.boardSize = String(settings.boardSize ?? '');
 }
 
+/**
+ * Sets the active player before cards are rendered.
+ *
+ * @param selectedPlayer - The player who goes first
+ */
 function initializeTurn(selectedPlayer: 'orange' | 'blue') {
     turn.currentPlayer = selectedPlayer === 'orange' ? turn.orangePlayer : turn.bluePlayer;
     syncTurnUi();
 }
 
+/**
+ * Handles card clicks on the game board.
+ *
+ * @param context - The current game page context
+ */
 function bindCardClick(context: GamePageContext) {
     context.fieldRef.addEventListener('click', (event) => {
         const card = (event.target as HTMLElement).closest('.card') as HTMLButtonElement | null;
@@ -60,6 +86,12 @@ function bindCardClick(context: GamePageContext) {
     });
 }
 
+/**
+ * Flips the clicked card and checks whether the match is finished.
+ *
+ * @param card - The clicked card element
+ * @param context - The current game page context
+ */
 function handleCardClick(card: HTMLButtonElement, context: GamePageContext) {
     flipCard(getCardIdFromElement(card));
     syncTurnUi();
@@ -70,6 +102,11 @@ function handleCardClick(card: HTMLButtonElement, context: GamePageContext) {
     }, 950);
 }
 
+/**
+ * Redirects to the result screens once all pairs are found.
+ *
+ * @param context - The current game page context
+ */
 function maybeEndGame(context: GamePageContext) {
     if (context.isRedirecting || turn.foundPairs.length * 2 < context.boardSize) {
         return;
@@ -81,6 +118,11 @@ function maybeEndGame(context: GamePageContext) {
     }, 2000);
 }
 
+/**
+ * Builds the persisted game result from the current turn state.
+ *
+ * @returns The result to persist, with the winner and final scores
+ */
 function buildGameResult(): GameResult {
     const winner = turn.getWinner();
     const winnerId: GameResult['winner'] = winner ? winner.id : 'draw';
@@ -93,6 +135,9 @@ function buildGameResult(): GameResult {
     };
 }
 
+/**
+ * Sets up the exit confirmation popup when the DOM contains it.
+ */
 function setupExitConfirmPopup() {
     const popupElements = getExitPopupElements();
     if (!popupElements) {
@@ -101,6 +146,11 @@ function setupExitConfirmPopup() {
     bindExitPopupEvents(popupElements);
 }
 
+/**
+ * Collects the popup elements needed for interaction.
+ *
+ * @returns The popup elements, or `null` if any are missing
+ */
 function getExitPopupElements() {
     const exitLink = document.querySelector('#exit a') as HTMLAnchorElement | null;
     const overlay = document.getElementById('exitConfirmOverlay');
@@ -112,6 +162,11 @@ function getExitPopupElements() {
     return { exitLink, overlay, cancelButton, confirmButton };
 }
 
+/**
+ * Wires the exit confirmation popup actions.
+ *
+ * @param elements - The popup elements to bind
+ */
 function bindExitPopupEvents(elements: NonNullable<ReturnType<typeof getExitPopupElements>>) {
     const targetUrl = elements.exitLink.href;
     const closePopup = createClosePopup(elements.exitLink, elements.overlay);
@@ -125,6 +180,13 @@ function bindExitPopupEvents(elements: NonNullable<ReturnType<typeof getExitPopu
     bindEscapeClose(elements.overlay, closePopup);
 }
 
+/**
+ * Creates a handler that closes the exit popup and restores focus.
+ *
+ * @param exitLink - The link to restore focus to
+ * @param overlay - The popup overlay element
+ * @returns A function that closes the popup
+ */
 function createClosePopup(exitLink: HTMLAnchorElement, overlay: HTMLElement) {
     return () => {
         overlay.classList.remove('is-open');
@@ -133,12 +195,24 @@ function createClosePopup(exitLink: HTMLAnchorElement, overlay: HTMLElement) {
     };
 }
 
+/**
+ * Opens the exit popup and focuses the cancel action.
+ *
+ * @param overlay - The popup overlay element
+ * @param cancelButton - The button to focus once opened
+ */
 function openExitPopup(overlay: HTMLElement, cancelButton: HTMLButtonElement) {
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
     cancelButton.focus();
 }
 
+/**
+ * Allows clicking the backdrop to close the popup.
+ *
+ * @param overlay - The popup overlay element
+ * @param closePopup - The function to call to close the popup
+ */
 function bindExitOverlayClose(overlay: HTMLElement, closePopup: () => void) {
     overlay.addEventListener('click', (event) => {
         if (event.target === overlay) {
@@ -147,6 +221,12 @@ function bindExitOverlayClose(overlay: HTMLElement, closePopup: () => void) {
     });
 }
 
+/**
+ * Closes the popup when Escape is pressed.
+ *
+ * @param overlay - The popup overlay element
+ * @param closePopup - The function to call to close the popup
+ */
 function bindEscapeClose(overlay: HTMLElement, closePopup: () => void) {
     window.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && overlay.classList.contains('is-open')) {
@@ -155,11 +235,17 @@ function bindEscapeClose(overlay: HTMLElement, closePopup: () => void) {
     });
 }
 
+/**
+ * Updates the current-player indicator and scoreboard.
+ */
 function syncTurnUi() {
     renderCurrentPlayerTag(turn.currentPlayer.id);
     renderScores();
 }
 
+/**
+ * Renders the current scores into the scoreboard.
+ */
 function renderScores() {
     const blueScoreValue = document.getElementById('blueScoreValue');
     const orangeScoreValue = document.getElementById('orangeScoreValue');
@@ -171,6 +257,13 @@ function renderScores() {
     }
 }
 
+/**
+ * Creates a shuffled deck for the selected theme and board size.
+ *
+ * @param theme - The theme id to source card faces from
+ * @param fieldSize - The total number of cards on the board
+ * @returns A shuffled deck of cards, or an empty array if the theme has no faces
+ */
 function createDeck(theme: string, fieldSize: number): Card[] {
     const imageFileNames = THEME_BY_ID[theme]?.cardFaceUrls ?? THEME_BY_ID[DEFAULT_THEME_ID]?.cardFaceUrls ?? [];
     if (imageFileNames.length === 0) {
@@ -185,6 +278,15 @@ function createDeck(theme: string, fieldSize: number): Card[] {
     return shuffle(deck);
 }
 
+/**
+ * Adds one matching pair of cards to the deck.
+ *
+ * @param deck - The deck to append the pair to
+ * @param id - The next available card id
+ * @param index - The pair's position in the deck
+ * @param imageFileNames - The available card face urls for the theme
+ * @returns The next available card id after adding the pair
+ */
 function addCardPair(deck: Card[], id: number, index: number, imageFileNames: string[]) {
     const pairId = index + 1;
     const faceUrl = imageFileNames[index % imageFileNames.length];
@@ -193,6 +295,14 @@ function addCardPair(deck: Card[], id: number, index: number, imageFileNames: st
     return id + 2;
 }
 
+/**
+ * Creates a card model from its deck metadata.
+ *
+ * @param id - The card's unique id
+ * @param pairId - The id shared by both cards in a matching pair
+ * @param faceUrl - The card's face image url
+ * @returns A new, unflipped and unmatched card
+ */
 function createCard(id: number, pairId: number, faceUrl: string): Card {
     return {
         id,
@@ -203,6 +313,12 @@ function createCard(id: number, pairId: number, faceUrl: string): Card {
     };
 }
 
+/**
+ * Returns a shuffled copy of the provided array.
+ *
+ * @param items - The array to shuffle
+ * @returns A new array with the same items in randomized order
+ */
 function shuffle<T>(items: T[]) {
     const shuffledItems = [...items];
     for (let currentIndex = shuffledItems.length - 1; currentIndex > 0; currentIndex--) {
@@ -214,6 +330,13 @@ function shuffle<T>(items: T[]) {
     return shuffledItems;
 }
 
+/**
+ * Renders the full card grid into the game field.
+ *
+ * @param fieldRef - The board's field element
+ * @param fieldSize - The total number of cards on the board
+ * @param theme - The theme id to source card assets from
+ */
 function renderCards(fieldRef: HTMLElement, fieldSize: number, theme: string) {
     const deck = createDeck(theme, fieldSize);
     const cardBackUrl = THEME_BY_ID[theme]?.cardBackUrl ?? THEME_BY_ID[DEFAULT_THEME_ID]?.cardBackUrl;
@@ -222,6 +345,14 @@ function renderCards(fieldRef: HTMLElement, fieldSize: number, theme: string) {
     }).join('');
 }
 
+/**
+ * Renders a single card button as HTML.
+ *
+ * @param card - The card to render
+ * @param cardBackUrl - The theme's card back image url, if any
+ * @param cardNumber - The card's 1-based position on the board
+ * @returns The card's HTML markup
+ */
 function renderCardMarkup(card: Card, cardBackUrl: string | undefined, cardNumber: number) {
     const frontStyleAttribute = styleAttribute(card.faceUrl);
     const backStyleAttribute = styleAttribute(cardBackUrl);
@@ -233,6 +364,12 @@ function renderCardMarkup(card: Card, cardBackUrl: string | undefined, cardNumbe
         </button>`;
 }
 
+/**
+ * Returns an inline style attribute for a background image.
+ *
+ * @param imageUrl - The image url to apply, if any
+ * @returns The `style` attribute string, or an empty string if no url is given
+ */
 function styleAttribute(imageUrl?: string) {
     if (!imageUrl) {
         return '';
@@ -240,6 +377,11 @@ function styleAttribute(imageUrl?: string) {
     return ` style="background-image: url('${imageUrl}')"`;
 }
 
+/**
+ * Updates the visual current-player marker in the header.
+ *
+ * @param player - The current player's id
+ */
 function renderCurrentPlayerTag(player: string) {
     const currentPlayerTag = document.getElementById('currentPlayerTag');
     if (!currentPlayerTag) {
@@ -251,7 +393,12 @@ function renderCurrentPlayerTag(player: string) {
         `;
 }
 
+/**
+ * Extracts the numeric card id from the rendered DOM id.
+ *
+ * @param card - The card element to read
+ * @returns The card's numeric id
+ */
 function getCardIdFromElement(card: HTMLButtonElement): number {
     return parseInt(card.id.replace('card_', ''), 10);
 }
-

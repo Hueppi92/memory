@@ -5,7 +5,10 @@ import { DEFAULT_THEME_ID, THEME_BY_ID } from './theme-catalog';
 
 initDrawPage();
 
-function initDrawPage() {
+/**
+ * Initializes the draw page with the active theme.
+ */
+function initDrawPage(): void {
 	const selectedSettings = loadGameSettings();
 	const selectedTheme = selectedSettings.theme ?? DEFAULT_THEME_ID;
 
@@ -14,7 +17,12 @@ function initDrawPage() {
 	setDrawThemeIcon(selectedTheme);
 }
 
-function setDrawBackLinkLabel(themeId: string) {
+/**
+ * Updates the draw page back link text for the selected theme.
+ *
+ * @param themeId - The theme to use for the back link label
+ */
+function setDrawBackLinkLabel(themeId: string): void {
 	const backLinkElement = document.getElementById('drawBackLink');
 
 	if (!backLinkElement) {
@@ -25,9 +33,14 @@ function setDrawBackLinkLabel(themeId: string) {
 	backLinkElement.textContent = selectedTheme?.backButtonLabel ?? 'Back to start';
 }
 
-function setDrawThemeIcon(themeId: string) {
+/**
+ * Applies the theme-specific icon to the draw page.
+ *
+ * @param themeId - The theme to use for the icon
+ */
+function setDrawThemeIcon(themeId: string): void {
 	const iconElement = document.getElementById('drawThemeIcon') as HTMLImageElement | null;
- 	const selectedTheme = getThemeById(themeId);
+	const selectedTheme = getThemeById(themeId);
 
 	if (!iconElement) {
 		return;
@@ -39,6 +52,12 @@ function setDrawThemeIcon(themeId: string) {
 	}
 }
 
+/**
+ * Resolves a theme by id, falling back to the default theme.
+ *
+ * @param themeId - The id to look up
+ * @returns The matching theme, or the default theme if not found
+ */
 function getThemeById(themeId: string) {
 	return THEME_BY_ID[themeId] ?? THEME_BY_ID[DEFAULT_THEME_ID];
 }
